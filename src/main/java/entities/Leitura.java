@@ -1,15 +1,21 @@
 package entities;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
 import entities.Comentario;
 import entities.Usuario;
 import entities.Livro;
-
-public class Leitura {
+@Entity
+public class Leitura extends DefaultEntity{
     private boolean curtida;
     private boolean completo;
     private int capitulosLidos;
+    @OneToOne
     private Usuario usuario;
+    @ManyToOne
     private Livro livro;
     private List<Comentario> comentarios;
 

@@ -6,6 +6,7 @@
 		<class>entities.Comentario</class>
 		<class>entities.DefaultEntity</class>
 		<class>entities.Livro</class>
+		<class>entities.Leitura</class>
 		<class>entities.Usuario</class>
 		<properties>
 			<!-- DB Driver -->

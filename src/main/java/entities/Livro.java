@@ -5,11 +5,13 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 @Entity
 public class Livro extends DefaultEntity {
     private String titulo;
     private String autor;
     private String sinopse;
+    @ManyToOne
     private Usuario usuario;
     @Enumerated(EnumType.ORDINAL)
     private Genero genero;

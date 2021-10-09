@@ -3,9 +3,12 @@ package entities;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 @Entity
 public class Comentario extends DefaultEntity{
     private String texto;
+    @ManyToOne
     private Livro livro;
     private LocalDateTime dataPublicacao ;
 
