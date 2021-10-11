@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+
+<h:body>
+    <h:form>
+        
+        <div class="card">
+            <h5>Horizontal and Fluid</h5>
+            <div class="ui-fluid">
+                <!-- titulo -->
+                <div class="p-field p-grid">
+                    <p:outputLabel for="titulo" styleClass="p-col-12 p-md-2" value="Firstname"/>
+                    <div class="p-col-12 p-md-10">
+                        <p:inputText id="titulo"/>
+                    </div>
+                </div>
+                <!--edicao-->
+                <!--http://www.primefaces.org:8080/showcase/ui/input/inputNumber.xhtml?jfwid=b71a3-->
+                <div class="p-field p-col-12 p-md-4">
+                    <p:outputLabel for="edicao" value="edicao"/>
+                    <p:inputNumber id="edicao" value="#{}" decimalPlaces="0" />
+                </div>
+                <!--autor-->
+                <div class="p-field p-grid">
+                    <p:outputLabel for="autor" styleClass="p-col-12 p-md-2" value="Lastname"/>
+                    <div class="p-col-12 p-md-10">
+                        <p:inputText id="autor"/>
+                    </div>
+                </div>
+                <!--sinopse-->
+                <!--http://www.primefaces.org:8080/showcase/ui/input/inputTextarea.xhtml?jfwid=b71a3-->
+                <p:inputTextarea rows="5" cols="30" counter="display" maxlength="10"
+                         counterTemplate="{0} sinopse." autoResize="false"/>
+                <h:outputText id="display" class="p-d-block" />
+                <!--tags-->
+                <!--http://www.primefaces.org:8080/showcase/ui/input/checkboxMenu.xhtml?jfwid=b71a3-->
+                <h5>tags</h5>
+                <p:selectCheckboxMenu id="multiple" value="#{}" label="" style="min-width: 15rem"
+                                  multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250">
+                <p:ajax event="itemUnselect" listener="#{checkboxView.onItemUnselect}"/>
+                <f:selectItems value="#{checkboxView.cities}"/>
+            </p:selectCheckboxMenu>
+            </div>
+        </div>
+        
+    </h:form>
+</h:body>
+
+</html>

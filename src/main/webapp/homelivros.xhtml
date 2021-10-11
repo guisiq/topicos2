@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+<header></header>
+
+<h:body>
+
+    <div class="content ">
+        <p:repeat value="" var="tags">
+            <!--https://primefaces.github.io/primefaces/11_0_0/#/components/gridcss-->
+            <p:card class="ui-g-12 ui-md-6 ui-lg-4 ui-xl-3" style="width: 25em">
+
+                <f:facet name="header">
+                    <img alt="imagem capa" src="../../resources/demo/images/usercard.png" />
+                </f:facet>
+                <f:facet name="titulo">
+                    <h:outputtext value="" />
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputtext value="" />
+                </f:facet>
+
+                <p>
+                    <h:outputtext value=""/>
+                </p>
+
+                <f:facet name="footer">
+                    <p:commandButton icon="pi pi-times" value="salvar" styleClass="ui-button-secondary"
+                        style="margin-left: .5em" />
+                    <p:commandButton icon="pi pi-check" value="ler" />
+                </f:facet>
+
+            </p:card>
+
+        </p:repeat>
+    </div>
+</h:body>
+
+</html>
