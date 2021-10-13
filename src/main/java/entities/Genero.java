@@ -5,6 +5,8 @@ public enum Genero {
     AVENTURA,
     ROMANCE,
     FICCAO,
-    POESIA
+    Terror,
+    POESIA,
+    DEFAULT
     
 }

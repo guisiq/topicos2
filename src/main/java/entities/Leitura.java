@@ -3,6 +3,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import entities.Comentario;
@@ -17,6 +18,7 @@ public class Leitura extends DefaultEntity{
     private Usuario usuario;
     @ManyToOne
     private Livro livro;
+    @OneToMany
     private List<Comentario> comentarios;
 
     

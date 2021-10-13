@@ -38,7 +38,9 @@ public abstract class CRUDController<T extends DefaultEntity> {
 		this.entitys = entitys;
 	} */
 	
-	public abstract void limpar();
+	public void limpar() {
+		setEntity(null);
+	}
 
 	public void salvar() {
 		Repository<T> repo = new Repository<T>();

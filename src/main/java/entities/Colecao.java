@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 @Entity
 public class Colecao extends DefaultEntity{
     private boolean publica;
     private String titulo;
+    @ManyToOne
     private Usuario autor;
     @ManyToMany
     private List<Livro> livros;

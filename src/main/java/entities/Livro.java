@@ -6,20 +6,41 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 @Entity
 public class Livro extends DefaultEntity {
     private String titulo;
     private String autor;
     private String sinopse;
+    private int edicao;
     @ManyToOne
     private Usuario usuario;
     @Enumerated(EnumType.ORDINAL)
     private Genero genero;
+    @OneToMany
     private List<Capitulo> capitulos;
 
     
+    public Livro(String titulo, String autor, String sinopse, Usuario usuario, Genero genero,
+            List<Capitulo> capitulos) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.sinopse = sinopse;
+        this.usuario = usuario;
+        this.genero = genero;
+        this.capitulos = capitulos;
+    }
+
     public Livro() {
         super();
+    }
+
+    public int getEdicao() {
+        return edicao;
+    }
+
+    public void setEdicao(int edicao) {
+        this.edicao = edicao;
     }
 
     public String getSinopse() {
@@ -28,15 +49,6 @@ public class Livro extends DefaultEntity {
 
     public void setSinopse(String sinopse) {
         this.sinopse = sinopse;
-    }
-
-    public Livro(String titulo, String autor, Usuario usuario, Genero genero, List<Capitulo> capitulos) {
-        super();
-        this.titulo = titulo;
-        this.autor = autor;
-        this.usuario = usuario;
-        this.genero = genero;
-        this.capitulos = capitulos;
     }
 
     public String getTitulo() {

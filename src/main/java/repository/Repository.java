@@ -10,7 +10,7 @@ import application.RepositoryException;
 
 public class Repository<T> {
 	
-	private EntityManager em = null;
+	protected EntityManager em = null;
 	
 	public Repository() {
 		em = JPAUtil.getEntityManager();
@@ -43,6 +43,13 @@ public class Repository<T> {
 
 	}
 	
+	public void remove(List<T> entitys) throws RepositoryException {
+		for (T t : entitys) {
+			remove(t);
+		}
+	}
+	
+
 	public List<T> getAll(Class clazz) throws RepositoryException {
 		try { 
 			String entityName = clazz.getSimpleName();

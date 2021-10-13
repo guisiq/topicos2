@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
 public class JPAUtil {
 	
 	private static EntityManagerFactory emf = 
-			Persistence.createEntityManagerFactory("crud.cebo");
+			Persistence.createEntityManagerFactory("topicos2");
 	
 	private JPAUtil() {	}
 	

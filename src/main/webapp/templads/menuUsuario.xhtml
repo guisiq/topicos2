@@ -1,6 +1,9 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<html   xmlns="http://www.w3.org/1999/xhtml" 
+        xmlns:h="http://java.sun.com/jsf/html" 
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets" 
+        xmlns:p="http://primefaces.org/ui">
 <h:head>
 </h:head>
 
@@ -25,9 +28,11 @@
                     </p:submenu>
                     <p:submenu label="tags" icon="pi pi-fw pi-plus">
                         <!--https://www.primefaces.org/showcase/ui/data/repeat.xhtml?jfwid=058c8-->
-                        <p:repeat value="" var="tags">
-                            <p:menuitem value="#{tags.name}" icon="pi pi-fw pi-search" />
-                        </p:repeat>
+                        <!-- 
+                            <p:repeat value="" var="tags">
+                                <p:menuitem value="#{tags.name}" icon="pi pi-fw pi-search" />
+                            </p:repeat>
+                        -->
                     </p:submenu>
                 </p:submenu>
 
