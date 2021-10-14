@@ -28,7 +28,7 @@ public class Usuario extends DefaultEntity {
         this.email = email;
         this.ativo = ativo;
     }
-
+    
     public Perfil getPerfil() {
         return perfil;
     }

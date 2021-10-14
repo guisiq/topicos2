@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>cadastro</title>
+</h:head>
+
+<h:body>
+	<h:form >
+		<p:outputPanel id="cadastro" >
+			<p:outputPanel>
+				<div class=" w-4">
+					<!--nome-->
+					<div class="p-field">
+						<p:outputLabel for="nome">nome</p:outputLabel>
+						<p:inputText id="nome" value="#{cadastroController.entity.nome}" />
+					</div>
+					<!--login-->
+					<div class="p-field">
+						<p:outputLabel for="login">login</p:outputLabel>
+						<p:inputText id="login" value="#{cadastroController.entity.login}" />
+					</div>
+					<!--senha-->
+					<div class="p-field">
+						<p:outputLabel for="senha">senha</p:outputLabel>
+						<p:inputText id="senha" value="#{cadastroController.entity.senha}" />
+					</div>
+					<!--email-->
+					<div class="p-field">
+						<p:outputLabel for="email">email</p:outputLabel>
+						<p:inputText id="email" value="#{cadastroController.entity.senha}" />
+					</div>
+					<!--telefone-->
+					<div class="p-field">
+						<p:outputLabel for="telefone">telefone</p:outputLabel>
+						<p:inputText id="telefone" value="#{cadastroController.entity.telefone}" />
+					</div>
+
+					<f:facet name="footer">
+					<p:commandButton value="cadastrar" icon="pi pi-check" 
+									 actionListener="#{cadastroController.save}"
+									 
+									 />
+					<p:commandButton value="Cancel" icon="pi pi-times" 
+									 
+									 actionListener="#{cadastroController.limpar}"
+									 class="ui-button-secondary"/>
+					</f:facet>
+				</div>
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</h:form>
+</h:body>
+
+</html>

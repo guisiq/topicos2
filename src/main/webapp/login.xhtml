@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>login</title>
+    </h:head>
+<h:body>
+        <h:form>
+            <p:outputPanel>
+            
+            <div class="p-grid ui-fluid">
+                <div class="p-col-12 p-md-4">
+                    <div class="ui-inputgroup">
+                        <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                        <p:inputText placeholder="Username" value="#{loginController.usuario.login}" required ="true" requiredMessage="insira o login"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-grid ui-fluid">
+                <div class="p-col-12 p-md-4">
+                    <div class="ui-inputgroup">
+                        <div class="ui-inputgroup-addon"><i class="pi pi-key"></i></div>
+                        <p:inputText placeholder="senha" value="#{loginController.usuario.senha}" required ="true" requiredMessage="insira a senha " />
+                    </div>
+                </div>
+            </div>
+            <p:card>
+                <p:commandButton value="entrar" action="#{loginController.entrar}" />
+                <p:commandLink value="cadastro" action="/faces/cadastro.xhtml?faces-redirect=true"/> <br/>
+            </p:card>
+            </p:outputPanel>
+        </h:form>
+
+</h:body>
+
+</html>
