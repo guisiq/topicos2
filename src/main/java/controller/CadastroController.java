@@ -1,10 +1,14 @@
 package controller;
 
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
 import entities.DefaultEntity;
 import entities.Perfil;
 import entities.Usuario;
-
-public class cadastroController extends CRUDController<Usuario> {
+@Named
+@ViewScoped
+public class CadastroController extends CRUDController<Usuario> {
 
     @Override
     public Usuario getEntity() {
@@ -15,6 +19,6 @@ public class cadastroController extends CRUDController<Usuario> {
         } else {
             
         }
-        return null;
+        return entity ;
     }
 }

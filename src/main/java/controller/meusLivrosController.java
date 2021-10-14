@@ -17,7 +17,7 @@ import repository.*;
 
 @Named
 @ViewScoped
-public class meusLivrosController extends CRUDController<Livro> implements Serializable {
+public class MeusLivrosController extends CRUDController<Livro> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

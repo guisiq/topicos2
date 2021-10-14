@@ -17,7 +17,7 @@ import repository.*;
 
 @Named
 @ViewScoped
-public class minhasColecoesController extends CRUDController<Colecao> implements Serializable {
+public class MinhasColecoesController extends CRUDController<Colecao> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

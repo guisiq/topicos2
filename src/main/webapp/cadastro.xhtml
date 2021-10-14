@@ -9,7 +9,7 @@
 	<h:form >
 		<p:outputPanel id="cadastro" >
 			<p:outputPanel>
-				<div class=" w-4">
+				<div >
 					<!--nome-->
 					<div class="p-field">
 						<p:outputLabel for="nome">nome</p:outputLabel>
@@ -36,16 +36,17 @@
 						<p:inputText id="telefone" value="#{cadastroController.entity.telefone}" />
 					</div>
 
-					<f:facet name="footer">
-					<p:commandButton value="cadastrar" icon="pi pi-check" 
+					
+					<p:commandButton value="cadastrar"
+									 icon="pi pi-check" 
 									 actionListener="#{cadastroController.save}"
 									 
 									 />
-					<p:commandButton value="Cancel" icon="pi pi-times" 
-									 
+					<p:commandButton value="Cancel" 	
+									 icon="pi pi-times"
 									 actionListener="#{cadastroController.limpar}"
 									 class="ui-button-secondary"/>
-					</f:facet>
+					
 				</div>
 
 			</p:outputPanel>
