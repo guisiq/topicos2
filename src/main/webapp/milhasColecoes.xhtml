@@ -1,14 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
-
-    <h:head>
-    </h:head>
-
-    <h:body>
-        <!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -28,34 +18,34 @@
 				<p:toolbarGroup>
 					<p:commandButton 	value="New" 
 										icon="pi pi-plus" 
-										actionListener="#{meusLivrosController.openNew}"
-									 	update=":form:manage-livro-content" 
-										oncomplete="PF('managelivroDialog').show()"
+										actionListener="#{minhasColecoesController.openNew}"
+									 	update=":form:manage-colecao-content" 
+										oncomplete="PF('manageColecaoDialog').show()"
 									 	styleClass="ui-button-success" 
 										style="margin-right: .5rem">
-						<p:resetInput target=":form:manage-livro-content"/>
+						<p:resetInput target=":form:manage-colecao-content"/>
 					</p:commandButton>
 				</p:toolbarGroup>
 			</p:toolbar>
 	
-			<p:dataTable 	id="dt-livros" 
-							widgetVar="dtlivros" 
-							var="livro" 
-							value="#{meusLivrosController.livros}"
-						 	reflow="true" 
-						 	selection="#{meusLivrosController.livrosSelection}" 
-							rowKey="#{livro.id}" 	
+			<p:dataTable 	id="dt-colecaos" 
+							widgetVar="dtColecaos" 
+							var="Colecao"  
+							value="#{minhasColecoesController.colecoes}"
+						 	reflow="true"  
+						 	selection="#{minhasColecoesController.colecoesSelection}" 
+							rowKey="#{Colecao.id}" 	
 							paginator="true"
-						 	rows="10" 	
+						 	rows="10" 	  
 							rowSelectMode="add" 
 							paginatorPosition="bottom">
 				<f:facet name="header">
-					<div class="livros-table-header">
-						<span style="font-weight: bold">livros</span>
+					<div class="Colecaos-table-header">
+						<span style="font-weight: bold">Colecaos</span>
 	
 						<span class="filter-container ui-input-icon-left">
 							<i class="pi pi-search"></i>
-							<p:inputText id="globalFilter" onkeyup="PF('dtlivros').filter()" placeholder="Search"/>
+							<p:inputText id="globalFilter" onkeyup="PF('dtColecaos').filter()" placeholder="Search"/>
 						</span>
 	
 					</div>
@@ -65,117 +55,90 @@
 	
 				<p:column selectionMode="multiple" exportable="false"></p:column>
 	
-				<p:column headerText="titulo" sortBy="#{livro.titulo}" filterBy="#{livro.titulo}">
-					<h:outputText value="#{livro.titulo}"/>
+				<p:column headerText="titulo" sortBy="#{Colecao.titulo}" filterBy="#{Colecao.titulo}">
+					<h:outputText value="#{Colecao.titulo}"/>
 				</p:column>
-				<p:column headerText="autor" sortBy="#{livro.autor}" filterBy="#{livro.autor}">
-					<h:outputText value="#{livro.autor}"/>
+				<p:column headerText="publica" sortBy="#{Colecao.publica}" >
+					<h:outputText value="#{Colecao.publica}"/>
 				</p:column>
-				<p:column headerText="edicao" sortBy="#{livro.edicao}">
-					<h:outputText value="#{livro.edicao}" style="font-weight: 700">
+				<p:column headerText="autor" sortBy="#{Colecao.autor}">
+					<h:outputText value="#{Colecao.autor.nome}" style="font-weight: 700">
 						<f:convertNumber />
 					</h:outputText>
 				</p:column>
-				<p:column headerText="Genero" sortBy="#{livro.genero}" filterBy="#{livro.genero}">
-					<h:outputText value="#{livro.genero}"/>
+				<p:column headerText="livros" sortBy="#{Colecao.livros}">
+					<h:outputText value="#{Colecao.livros}"/>
 				</p:column>
 
 				<p:column exportable="false">
 					
 					<p:commandButton 	icon="pi pi-pencil" 
-										update=":form:manage-livro-content"
-									 	oncomplete="PF('managelivroDialog').show()"
+										update=":form:manage-colecao-content"
+									 	oncomplete="PF('manageColecaoDialog').show()"
 									 	styleClass="edit-button rounded-button ui-button-success" 
 										process="@this">
-						<f:setPropertyActionListener value ="#{livro}" target="#{meusLivrosController.entity}" />
-						<p:resetInput target=":form:manage-livro-content"/>
+						<f:setPropertyActionListener value ="#{Colecao}" target="#{minhasColecoesController.entity}" />
+						<p:resetInput target=":form:manage-colecao-content"/>
 					</p:commandButton>
-
+					<!--  -->
 					<p:commandButton class="ui-button-warning rounded-button" 
 									 icon="pi pi-trash" 
 									 process="@this"
-									 update="dt-livros"
-                                     actionListener="#{meusLivrosController.deletelivro(livro)}"
-									 
-						<f:setPropertyActionListener value ="#{livro}" target = "#{meusLivrosController.entity}"/>
+									 update="dt-colecaos"
+									 actionListener="#{minhasColecoesController.deleteColecao(Colecao)}">
+									 <!-- oncomplete="PF('deleteColecaoDialog').show()" -->
+						<f:setPropertyActionListener value ="#{Colecao}" target = "#{minhasColecoesController.entity}"/>
 					</p:commandButton>
 				</p:column>
 	
 			</p:dataTable>
 	
-			<p:dialog 	header="livro Details" 
+			<p:dialog 	header="Colecao Details" 
 						showEffect="fade" 
 						modal="true"
-					  	widgetVar="managelivroDialog" 
+					  	widgetVar="manageColecaoDialog" 
 						responsive="true">
-				<p:outputPanel id="manage-livro-content" class="ui-fluid">
+				<p:outputPanel id="manage-colecao-content" class="ui-fluid">
 					<p:outputPanel>
 						<!--titulo-->
 						<div class="p-field">
 							<p:outputLabel for="titulo">Titulo</p:outputLabel>
-							<p:inputText id="titulo" value="#{meusLivrosController.entity.titulo}"/>
+							<p:inputText id="titulo" value="#{minhasColecoesController.entity.titulo}"/>
 						</div>
-						<!--sinopse-->
+						
+						<!--autor-->
 						<div class="p-field">
-							<p:outputLabel for="sinopse">Sinopse</p:outputLabel>
-							<p:inputTextarea id="sinopse" value="#{meusLivrosController.entity.sinopse}"/>
+							<p:outputLabel for="autor">autor</p:outputLabel>
+							<p:inputTextarea id="autor" value="#{minhasColecoesController.entity.autor.name}"/>
 						</div>
-						<!--edicao-->
-						<div class="p-field">
-							<p:outputLabel for="edicao">Edicao</p:outputLabel>
-							<p:inputTextarea id="edicao" value="#{meusLivrosController.entity.edicao}"/>
-						</div>
-						<!-- Genero -->
-						<div class="p-field">
-							<p:outputLabel for="Genero">Genero</p:outputLabel>
-							<!--http://www.primefaces.org:8080/showcase/ui/input/oneRadio.xhtml?jfwid=1f7ce-->
-							<p:selectOneRadio id="Genero" value="#{meusLivrosController.entity.genero}" layout="grid" columns="3" styleClass="grid-radio">
-								<f:selectItems value="#{meusLivrosController.generos}" var="genero" itemLabel="#{genero.name()}" itemValue="#{genero}"/>
-							</p:selectOneRadio>
-							<!--
-							<p:selectOneRadio 	id="Genero" 
-												value="#{meusLivrosController.entity.genero}"
-												layout="responsive" 
-												columns="2">
-								implementar a tag p:repeat 
-								<f:selectItem itemLabel="Acao" itemValue="#{generos.get(0)}"/>
-								<f:selectItem itemLabel="Aventura" itemValue="#{generos.get(1)}"/>
-								<f:selectItem itemLabel="Romance" itemValue="#{generos.get(2)}"/>
-								<f:selectItem itemLabel="Ficcao" itemValue="#{generos.get(3)}"/>
-								<f:selectItem itemLabel="Terro" itemValue="#{generos.get(4)}"/>
-								<f:selectItem itemLabel="Poesia" itemValue="#{generos.get(5)}"/>
-							</p:selectOneRadio>
-							-->
-						</div>
+						
 
 					</p:outputPanel>
 				</p:outputPanel>
 	
 				<f:facet name="footer">
 					<p:commandButton value="Save" icon="pi pi-check" 
-									 actionListener="#{meusLivrosController.savelivro}"
-									 update="manage-livro-content dt-livros" 
-									 process="manage-livro-content @this"
+									 actionListener="#{minhasColecoesController.saveColecao}"
+									 update="manage-colecao-content dt-colecaos" 
+									 process="manage-colecao-content @this"
 									 />
 					<p:commandButton value="Cancel" icon="pi pi-times" 
-					
-									 onclick="PF('managelivroDialog').hide()"
+									 onclick="PF('manageColecaoDialog').hide()"
 									 class="ui-button-secondary"/>
 				</f:facet>
 
 			</p:dialog>
 	
-			<p:confirmDialog widgetVar="deletelivroDialog" 
+			<p:confirmDialog widgetVar="deleteColecaoDialog" 
 							 showEffect="fade" 
 							 width="300"
-							 message="excluir o  livro?" 
+							 message="excluir o  Colecao?" 
 							 header="Confirm" 
 							 severity="warn">
-				<p:commandButton value="confirma" icon="pi pi-check" 
-                                actionListener="#{meusLivrosController.deletelivro}"
-								 process="@this" oncomplete="PF('deletelivroDialog').hide()"/>
+				<p:commandButton value="confirma" icon="pi pi-check" actionListener="#{minhasColecoesController.deleteColecao}"
+								 process="@this" oncomplete="PF('deleteColecaoDialog').hide()"/>
 				<p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-								 onclick="PF('deletelivroDialog').hide()"/>
+								 onclick="PF('deleteColecaoDialog').hide()"/>
 			</p:confirmDialog>
 	
 			<p:confirmDialog global="true" showEffect="fade" width="300">
@@ -187,7 +150,4 @@
 	</h:form>
 </h:body>
 
-</html>
-
-    </h:body>
 </html>

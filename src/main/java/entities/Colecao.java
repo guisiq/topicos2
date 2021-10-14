@@ -10,11 +10,12 @@ import javax.persistence.OneToMany;
 public class Colecao extends DefaultEntity{
     private boolean publica;
     private String titulo;
+    private String descricao;
     @ManyToOne
     private Usuario autor;
     @ManyToMany
     private List<Livro> livros;
-    
+    //#region construtores
     public Colecao() {
     }
     public Colecao(boolean publica, String titulo, Usuario autor, List<Livro> livros) {
@@ -23,6 +24,8 @@ public class Colecao extends DefaultEntity{
         this.autor = autor;
         this.livros = livros;
     }
+    //#endregion
+    //#region geters e seters 
     public boolean isPublica() {
         return publica;
     }
@@ -34,6 +37,12 @@ public class Colecao extends DefaultEntity{
     }
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+    public String getDescricao() {
+        return descricao;
+    }
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
     public Usuario getAutor() {
         return autor;
@@ -47,6 +56,7 @@ public class Colecao extends DefaultEntity{
     public void setLivros(List<Livro> livros) {
         this.livros = livros;
     }
+    //#endregion
     
     
 }
