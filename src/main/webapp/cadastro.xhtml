@@ -28,7 +28,7 @@
 					<!--email-->
 					<div class="p-field">
 						<p:outputLabel for="email">email</p:outputLabel>
-						<p:inputText id="email" value="#{cadastroController.entity.senha}" />
+						<p:inputText id="email" value="#{cadastroController.entity.email}" />
 					</div>
 					<!--telefone-->
 					<div class="p-field">
@@ -39,8 +39,7 @@
 					
 					<p:commandButton value="cadastrar"
 									 icon="pi pi-check" 
-									 actionListener="#{cadastroController.save}"
-									 
+									 action="#{cadastroController.cadastrar}"
 									 />
 					<p:commandButton value="Cancel" 	
 									 icon="pi pi-times"
