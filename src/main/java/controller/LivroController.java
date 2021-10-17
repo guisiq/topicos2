@@ -21,8 +21,8 @@ import repository.*;
 @ViewScoped
 public class LivroController extends CRUDController<Livro> implements Serializable{
 
-	private List<Livro> livros;
 	private static final long serialVersionUID = 6022204328275496136L;
+	private List<Livro> livros;
     Repository<Livro> repo = new Repository<Livro>();
 	
     public List<Livro> getLivros() {
@@ -36,8 +36,11 @@ public class LivroController extends CRUDController<Livro> implements Serializab
 	public void editar(Livro livro) {
 		this.setEntity(livro);
 	}
+	public String redirecionar() {
+		return "cadastro.xhtml?faces-redirect=true";
+	}
     
-	public void salvar() {
+	public void cadastrar() {
         try {
 			repo.save(entity);
 		} catch (RepositoryException e) {

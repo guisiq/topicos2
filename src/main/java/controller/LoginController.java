@@ -46,9 +46,12 @@ public class LoginController implements Serializable{
 			return "ola.xhtml";
 			
 		}
-		Util.addErrorMessage("Login ou senha inv�lido.");
+		Util.addErrorMessage("Login ou senha invalido.");
 		return null;
 		
+	}
+	public String redirecionar() {
+		return "cadastro.xhtml?faces-redirect=true";
 	}
 	public Usuario getUsuario() {
 		if (usuario == null) {

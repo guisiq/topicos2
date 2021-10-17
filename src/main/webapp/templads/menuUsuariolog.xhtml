@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>teste</title>
+</h:head>
+
+<h:body>
+    <!--https://www.primefaces.org/showcase/ui/menu/menubar.xhtml?jfwid=058c8-->
+    <!--https://www.primefaces.org/showcase/icons.xhtml?jfwid=058c8-->
+    <!--https://primefaces.github.io/primefaces/11_0_0/#/components/menubar-->
+    <div class="card">
+        <h:form>
+            <p:growl id="messages" />
+
+            <p:menubar>
+                <div class="ui-input-icon-left p-mr-2">
+                   
+                    <p:inputText placeholder="Search" />
+                </div>
+                
+                <p:menuitem value="pesquisar" icon="pi pi-fw pi-search" />
+                
+                <p:submenu label="ir para" icon="pi pi-fw pi-plus">
+                    <p:submenu label="categorias" icon="pi pi-fw pi-plus">
+                    </p:submenu>
+                    <p:submenu label="tags" icon="pi pi-fw pi-plus">
+                        <!--https://www.primefaces.org/showcase/ui/data/repeat.xhtml?jfwid=058c8-->
+                        <!-- 
+                            <p:repeat value="" var="tags">
+                                <p:menuitem value="#{tags.name}" icon="pi pi-fw pi-search" />
+                            </p:repeat>
+                        -->
+                    </p:submenu>
+                </p:submenu>
+
+                <!--
+                <p:submenu label="File" icon="pi pi-fw pi-file">
+                    <p:submenu label="New" icon="pi pi-fw pi-plus">
+                        <p:menuitem value="Bookmark" icon="pi pi-fw pi-bookmark" />
+                        <p:menuitem value="Video" icon="pi pi-fw pi-video" />
+                    </p:submenu>
+                    <p:menuitem value="Delete" icon="pi pi-fw pi-trash" />
+                    <p:divider />
+                    <p:menuitem value="Export" icon="pi pi-fw pi-external-link" />
+                </p:submenu>
+                -->
+                
+                <p:divider layout="vertical" />
+
+                <f:facet name="options">
+                    
+                    
+                    <p:submenu label="conta " icon="pi pi-fw pi-user">
+                        <p:menuitem value="perfil" icon="pi pi-fw pi-user-plus" />
+                        <p:menuitem value="atualizar cadastro" icon="pi pi-fw pi-sign-out"  />
+                        <p:menuitem value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" />
+                    </p:submenu>
+
+                    <p:button value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" />
+                
+                </f:facet>
+            </p:menubar>
+        </h:form>
+    </div>
+</h:body>
+
+</html>
