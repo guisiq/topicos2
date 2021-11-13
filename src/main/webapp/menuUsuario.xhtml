@@ -5,7 +5,10 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>teste</title>
+    <ui:insert name = "cabeca" >
+        <title>teste</title>
+
+    </ui:insert>
 </h:head>
 
 <h:body>
@@ -36,7 +39,7 @@
                 
                 <!--pesquisar -->
                 <p:menuitem value="" icon="pi pi-search">
-                    <p:inputText placeholder="Search"/>
+                    <p:inputText placeholder="Pesquisar livro"/>
                 </p:menuitem>
                 
                 <!-- escrever -->
@@ -52,6 +55,16 @@
             </p:menubar>
         </h:form>
     </div>
+    <div class="card">   
+        <p:panel size="80">
+        
+        <ui:insert name = "corpo" >
+        
+        
+        </ui:insert>
+        
+        </p:panel>
+</div>
 </h:body>
 
 </html>

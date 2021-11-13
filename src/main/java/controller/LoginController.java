@@ -44,7 +44,7 @@ public class LoginController implements Serializable{
 			Session.getInstance().set("usuarioLogado", usuarioLogado);
 			
 			// redirecionando para o template
-			return "meusLivros.xhtml?faces-redirect=true";
+			return "/pages/meusLivros.xhtml?faces-redirect=true";
 			
 		}
 		Util.addErrorMessage("Login ou senha invalido.");

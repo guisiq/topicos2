@@ -36,9 +36,7 @@ public class LivroController extends CRUDController<Livro> implements Serializab
 	public void editar(Livro livro) {
 		this.setEntity(livro);
 	}
-	public String redirecionar() {
-		return "cadastro.xhtml?faces-redirect=true";
-	}
+	
     
 	public void cadastrar() {
         try {

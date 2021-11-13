@@ -54,21 +54,29 @@
 				
 	
 				<p:column selectionMode="multiple" exportable="false"></p:column>
-	
+				<!-- titulo -->
 				<p:column headerText="titulo" sortBy="#{Colecao.titulo}" filterBy="#{Colecao.titulo}">
 					<h:outputText value="#{Colecao.titulo}"/>
 				</p:column>
+				<!-- publica -->
 				<p:column headerText="publica" sortBy="#{Colecao.publica}" >
 					<h:outputText value="#{Colecao.publica}"/>
 				</p:column>
+				<!-- autor -->
 				<p:column headerText="autor" sortBy="#{Colecao.autor}">
 					<h:outputText value="#{Colecao.autor.nome}" style="font-weight: 700">
 						<f:convertNumber />
 					</h:outputText>
 				</p:column>
+				<p:rowExpansion>
+					<p:outputLabel>teste</p:outputLabel>               
+					<p:inputText value = "tesewewe"></p:inputText>               
+            	</p:rowExpansion>
+				<!-- livros -->
+<!-- 				
 				<p:column headerText="livros" sortBy="#{Colecao.livros}">
 					<h:outputText value="#{Colecao.livros}"/>
-				</p:column>
+				</p:column> -->
 
 				<p:column exportable="false">
 					
@@ -105,13 +113,16 @@
 							<p:outputLabel for="titulo">Titulo</p:outputLabel>
 							<p:inputText id="titulo" value="#{minhasColecoesController.entity.titulo}"/>
 						</div>
-						
-						<!--autor-->
+						<!--titulo-->
 						<div class="p-field">
-							<p:outputLabel for="autor">autor</p:outputLabel>
-							<p:inputTextarea id="autor" value="#{minhasColecoesController.entity.autor.name}"/>
+							<p:outputLabel for="descricao">Descricao</p:outputLabel>
+							<p:inputTextarea rows="5" cols="30" id="descricao" value="#{minhasColecoesController.entity.descricao}"/>
 						</div>
-						
+						<!-- privado? -->
+						<p:selectOneRadio id="city" value="#{minhasColecoesController.entity.publica}" layout="grid" columns="1" styleClass="grid-radio">
+							<f:selectItem itemLabel="publica" itemValue="#{true}"/>
+							<f:selectItem itemLabel="privada" itemValue="#{false}"/>
+						</p:selectOneRadio>
 
 					</p:outputPanel>
 				</p:outputPanel>
