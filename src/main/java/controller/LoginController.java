@@ -34,16 +34,17 @@ public class LoginController implements Serializable{
 	public String entrar() {
 		
 		String hash = Util.hash(getUsuario().getSenha() + getUsuario().getLogin());
+		
 		getUsuario().setSenha(hash);
 		Usuario usuarioLogado = repo.validaLogin(getUsuario());
 		if (usuarioLogado != null) {
 			//Adicionar na sessao o objeto usuarioLogado
- 			ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-			context.getSessionMap().put("usuarioLogado", usuarioLogado);
+ 			//ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+			//context.getSessionMap().put("usuarioLogado", usuarioLogado);
 			Session.getInstance().set("usuarioLogado", usuarioLogado);
 			
 			// redirecionando para o template
-			return "ola.xhtml";
+			return "meusLivros.xhtml?faces-redirect=true";
 			
 		}
 		Util.addErrorMessage("Login ou senha invalido.");

@@ -7,6 +7,6 @@ public enum Genero {
     FICCAO,
     Terror,
     POESIA,
-    DEFAULT
+    INDEFINIDO
     
 }

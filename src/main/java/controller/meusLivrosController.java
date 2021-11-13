@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import org.primefaces.PrimeFaces;
 
 import application.RepositoryException;
+import application.Session;
 import application.Util;
 import entities.*;
 import repository.*;
@@ -121,7 +121,8 @@ public class MeusLivrosController extends CRUDController<Livro> implements Seria
 
 	public List<Livro> getLivros() {
 		try {
-			livros = repo.getbyAutor("eu");
+			livros = repo.getbyAutor(getUsuarioLog());
+			// muda para usuario
 		}catch (Exception e) {
 			Util.addErrorMessage("nao encontramos livros");
 		}
@@ -134,16 +135,15 @@ public class MeusLivrosController extends CRUDController<Livro> implements Seria
 
 	public Usuario getUsuarioLog() {
 		if (usuarioLog == null) {
-			Repository<Usuario> uRepository =  new Repository<Usuario>();
 			try {
-				usuarioLog = uRepository.getAll(Usuario.class).get(0);
-			} catch (RepositoryException e) {
-				// TODO Auto-generated catch block
+				usuarioLog = (Usuario)Session.getInstance().get("usuarioLogado");
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		return usuarioLog;
 	}
+	
 	public void setUsuarioLog(Usuario usuarioLog) {
 		this.usuarioLog = usuarioLog;
 	}
@@ -151,7 +151,7 @@ public class MeusLivrosController extends CRUDController<Livro> implements Seria
 	public Livro getEntity() {
 		if (entity == null){
 			this.entity = new Livro();
-			this.entity.setGenero(Genero.DEFAULT);
+			this.entity.setGenero(Genero.INDEFINIDO);
 			this.entity.setUsuario(getUsuarioLog());
 			this.entity.setAutor(getUsuarioLog().getNome());
 		}

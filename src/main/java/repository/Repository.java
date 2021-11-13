@@ -18,9 +18,17 @@ public class Repository<T> {
 	
 	public T save(T entity) throws RepositoryException {
 		try { 
-			getEntityManager().getTransaction().begin();
-			T e = getEntityManager().merge(entity);
-			getEntityManager().getTransaction().commit();
+			var em = getEntityManager();
+			
+			if(!em.getTransaction().isActive())
+		        em.getTransaction().begin();
+			em.persist(entity);
+			
+			//em.getTransaction().commit();
+			//em.close();
+			
+			T e = em.merge(entity);
+			em.getTransaction().commit();
 			return e;
 		} catch (Exception e) {
 			System.out.println("Erro ao executar o save");

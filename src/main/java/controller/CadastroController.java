@@ -31,7 +31,7 @@ public class CadastroController extends CRUDController<Usuario>  implements Seri
     public String cadastrar() {
 		Repository<Usuario> repo = new Repository<Usuario>();
 		try {
-            getEntity().setSenha(Util.hash(getEntity().getSenha()));
+            getEntity().setSenha(Util.hash(getEntity().getSenha() + getEntity().getLogin()));
 			repo.save(getEntity());
 			limpar();
 			Util.addInfoMessage("Usuario salvo com sucesso.");

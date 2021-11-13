@@ -18,7 +18,7 @@ public class UsuarioRepo extends Repository<Usuario> {
 		
 		Usuario usuarioLogado = null;
 		
-		Query query = em.createQuery("SELECT u FROM "+Usuario.class.getName() +"  u WHERE  u.login = :login AND u.senha =:senha");
+		Query query = em.createQuery("SELECT u FROM Usuario u WHERE  u.login LIKE :login AND u.senha LIKE :senha");
 		
 		/*
 		usuarioLogado = (Usuario) em.createQuery(sql.toString(),Usuario.class).setParameter("email", usu.getEmail())
@@ -33,6 +33,7 @@ public class UsuarioRepo extends Repository<Usuario> {
         	usuarioLogado = (Usuario)query.getSingleResult();			
 		} catch (Exception e) {
 			System.out.println("usuario nao encontrado ");
+			System.out.println(usu.getLogin());
 			System.out.println(usu.getSenha());
 		}
 		

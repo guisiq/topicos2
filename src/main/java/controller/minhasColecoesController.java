@@ -11,6 +11,7 @@ import javax.inject.Named;
 import org.primefaces.PrimeFaces;
 
 import application.RepositoryException;
+import application.Session;
 import application.Util;
 import entities.*;
 import repository.*;
@@ -47,7 +48,7 @@ public class MinhasColecoesController extends CRUDController<Colecao> implements
 	public List<Colecao> getColecoes() {
 		if(colecoes == null) {
 			try {
-				colecoes = repo.getbyAutor("eu");
+				colecoes = repo.getbyAutor(getUsuarioLog());
 			}catch (Exception e) {
 				Util.addErrorMessage("nao encontramos colecoes");
 			}
@@ -100,6 +101,13 @@ public class MinhasColecoesController extends CRUDController<Colecao> implements
 
 	
 	public Usuario getUsuarioLog() {
+		if (usuarioLog == null) {
+			try {
+				usuarioLog = (Usuario)Session.getInstance().get("usuarioLogado");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return usuarioLog;
 	}
 	
@@ -110,7 +118,7 @@ public class MinhasColecoesController extends CRUDController<Colecao> implements
 	public Colecao getEntity() {
 		if (entity == null){
 			this.entity = new Colecao();
-			this.entity.setAutor(usuarioLog);
+			this.entity.setAutor(getUsuarioLog());
 		}
 		return entity;
 	}

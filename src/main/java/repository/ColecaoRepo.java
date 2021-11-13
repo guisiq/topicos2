@@ -1,6 +1,7 @@
 package repository;
 
 import entities.Colecao;
+import entities.Usuario;
 import java.util.List;
 
 import application.RepositoryException;
@@ -11,7 +12,7 @@ public class ColecaoRepo extends Repository<Colecao>{
 		Class clazz = Colecao.class;
         return getAll(clazz);
 	} 
-    public List<Colecao> getbyAutor(String autor) throws RepositoryException {
+    public List<Colecao> getbyAutor(Usuario autor) throws RepositoryException {
         try { 
 			/*
 			
@@ -24,7 +25,7 @@ public class ColecaoRepo extends Repository<Colecao>{
 			List<Colecao> retorno = getAll();
 			retorno.removeIf( c -> {
 				if (c.getAutor() != null) {	
-					return !c.getAutor().getNome().equals(autor); 
+					return ! ( c.getAutor().getId() == autor.getId() ); 
 				}else{
 					return true;
 				}

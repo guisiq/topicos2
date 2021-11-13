@@ -1,5 +1,6 @@
 package repository;
 import entities.Livro;
+import entities.Usuario;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class livroRepo extends Repository<Livro>{
 		}
 
 	}   
-    public List<Livro> getbyAutor(String autor) throws RepositoryException {
+    public List<Livro> getbyAutor(Usuario autor) throws RepositoryException {
 		Class clazz = Livro.class;
         try { 
 			/*
@@ -38,8 +39,8 @@ public class livroRepo extends Repository<Livro>{
 			*/
 			List<Livro> retorno = getAll();
 			retorno.removeIf( l -> {
-				if (l.getAutor() != null) {	
-					return !l.getAutor().equals(autor); 
+				if (l != null) {	
+					return !(l.getId() == autor.getId()); 
 				}else{
 					return true;
 				}
