@@ -29,14 +29,15 @@ public class livroRepo extends Repository<Livro>{
     public List<Livro> getbyAutor(Usuario autor) throws RepositoryException {
 		Class clazz = Livro.class;
         try { 
-			/*
+			
 			
 			String entityName = clazz.getSimpleName();
 			// jpql
-			Query query = em.createQuery("SELECT u FROM "+entityName+" u WHERE u.autor ="+ autor);
+			Query query = em.createQuery("SELECT u FROM "+entityName+" u WHERE u.usuario.id =:autor");
+			query.setParameter("autor", autor.getId());
 			return query.getResultList();
 			
-			*/
+			/*
 			List<Livro> retorno = getAll();
 			retorno.removeIf( l -> {
 				if (l != null) {	
@@ -45,7 +46,7 @@ public class livroRepo extends Repository<Livro>{
 					return true;
 				}
 			});
-			return retorno;
+			return retorno;*/
 		} catch (Exception e) {
 			System.out.println("Erro ao executar o getAll");
 			e.printStackTrace();
