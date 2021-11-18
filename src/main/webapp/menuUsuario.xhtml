@@ -22,7 +22,7 @@
                     <p:menuitem value="meu perfil" icon="pi pi-fw pi-user-plus"/>
                     <p:menuitem value="biblioteca" icon="pi pi-fw pi-user-minus"/>
                     <p:menuitem value="configuracoes " icon="pi pi-fw pi-user-minus"/>
-                    <p:menuitem value="termina sesão " icon="pi pi-fw pi-user-minus"/>
+                    <p:menuitem value="termina sesão " action="#{menuController.encerrarSessao}"  icon="pi pi-fw pi-user-minus"/>
                 </p:submenu>
                 <p:divider layout="vertical"/>
                 
@@ -56,7 +56,7 @@
         </h:form>
     </div>
     <div class="card">   
-        <p:panel size="80">
+        <p:panel size="1000">
         
         <ui:insert name = "corpo" >
         

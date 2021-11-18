@@ -1,13 +1,17 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/menuUsuario.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-</h:head>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<ui:define name="cabeca">
+		<title>Minhas Colecoes</title>
+	</ui:define>
+	<ui:define name="corpo">
+		
+	
 
-<h:body>
 	<!--http://primefaces.org/showcase/ui/data/datatable/expansion.xhtml?jfwid=1c262-->
 	<!--http://primefaces.org/showcase/ui/data/datatable/crud.xhtml?jfwid=1c262-->
 	<h:form id="form">
@@ -52,7 +56,9 @@
 				</f:facet>
 	
 				
-	
+				<p:column style="width:2rem">
+                	<p:rowToggler/>
+            	</p:column>
 				<p:column selectionMode="multiple" exportable="false"></p:column>
 				<!-- titulo -->
 				<p:column headerText="titulo" sortBy="#{Colecao.titulo}" filterBy="#{Colecao.titulo}">
@@ -159,6 +165,5 @@
 			</p:confirmDialog>
 		</div>
 	</h:form>
-</h:body>
-
-</html>
+</ui:define>
+</ui:composition>

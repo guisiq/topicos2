@@ -40,4 +40,23 @@ public class UsuarioRepo extends Repository<Usuario> {
 		return usuarioLogado;
 
 	}
+
+	@SuppressWarnings("unchecked")
+	public Usuario findByEmail(String email) throws RepositoryException {
+		try { 
+			
+			//JPQL ou SQL
+			Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.email = :email ");
+			query.setParameter("email", email);
+			
+			return (Usuario) query.getSingleResult();
+		} catch (Exception e) {
+			// mandando pro console o exception gerado
+			e.printStackTrace();
+			// repassando a excecao para quem vai executar o metodo
+			throw new RepositoryException("Problema ao pesquisar usu�rios.");
+		}
+	}
+
+	
 }
