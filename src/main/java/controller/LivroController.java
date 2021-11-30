@@ -11,9 +11,14 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 
+import org.primefaces.event.SelectEvent;
+
 import application.JPAUtil;
 import application.RepositoryException;
+import application.Util;
+import controller.listen.ColecaoListing;
 import application.JPAUtil;
+import entities.Colecao;
 import entities.Livro;
 import repository.*;
 
@@ -23,10 +28,31 @@ public class LivroController extends CRUDController<Livro> implements Serializab
 
 	private static final long serialVersionUID = 6022204328275496136L;
 	private List<Livro> livros;
-    Repository<Livro> repo = new Repository<Livro>();
-	
-    public List<Livro> getLivros() {
-		return livros;
+    LivroRepo repo = new LivroRepo();
+
+	public void  abrirColecaoListing() {
+		ColecaoListing listing = new ColecaoListing();
+		listing.open();
+
+		System.out.println("Abrir Estado List1");
+
+	}
+
+	public void obterColecaoListing(SelectEvent<Colecao> event) {
+		System.out.println(event.getObject());
+	}
+    
+
+	public List<Livro> getLivros() {
+		
+		try {
+			return livros = repo.getAll();
+		} catch (RepositoryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Util.addErrorMessage("");
+			return null;
+		}
 	}
 	
     public void setLivros(List<Livro> livros) {

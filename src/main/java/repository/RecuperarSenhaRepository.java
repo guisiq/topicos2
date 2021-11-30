@@ -11,9 +11,9 @@ public class RecuperarSenhaRepository extends Repository<RecuperarSenha> {
 	
     public List<RecuperarSenha> getbycodigo(String codigo) throws RepositoryException {
 		try { 
-			Query query = em.createQuery("SELECT u FROM RecuperarSenha u"+
-                                        "WHERE U.codigo = :codigo"+
-                                        "ORDER BY u.dataLimite");
+			Query query = em.createQuery("SELECT u FROM RecuperarSenha u "+
+                                        "WHERE U.codigo = :codigo "+
+                                        "ORDER BY u.dataLimite ");
             query.setParameter("codigo", codigo);
 			return query.getResultList();
 		} catch (Exception e) {

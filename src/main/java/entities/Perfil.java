@@ -20,6 +20,7 @@ public enum Perfil {
 		// acesso para todos os usuarios
 		paginasComPermissao.add("/topicos2/pages/meusLivros.xhtml");
 		paginasComPermissao.add("/topicos2/pages/milhasColecoes.xhtml");
+		paginasComPermissao.add("/topicos2/pages/milhasColecoesDL.xhtml");
 		
 		switch (id) {
 		case 1:

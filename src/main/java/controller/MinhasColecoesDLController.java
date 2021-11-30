@@ -19,12 +19,14 @@ import repository.*;
 
 @Named
 @ViewScoped
-public class MinhasColecoesController extends CRUDController<Colecao> implements Serializable {
+public class MinhasColecoesDLController extends CRUDController<Colecao> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private List<Colecao> colecoes;
 	private List<Colecao> colecoesSelection;
+	private ColecaoListing listing;
+
 	
 	private Usuario usuarioLog;
 	private ColecaoRepo repo = new ColecaoRepo();
@@ -83,7 +85,6 @@ public class MinhasColecoesController extends CRUDController<Colecao> implements
 		}
         
     }
-
 	public void saveColecao() {
 		try {
 
@@ -100,6 +101,7 @@ public class MinhasColecoesController extends CRUDController<Colecao> implements
 		}
 		
 	}
+
 	
 	public Usuario getUsuarioLog() {
 		if (usuarioLog == null) {
@@ -114,6 +116,17 @@ public class MinhasColecoesController extends CRUDController<Colecao> implements
 	
 	public void setUsuarioLog(Usuario usuarioLog) {
 		this.usuarioLog = usuarioLog;
+	}
+	public ColecaoListing getListing() {
+		if (listing == null){
+			this.listing = new ColecaoListing();
+		}
+		return listing;
+		
+	}
+	public void setListing(ColecaoListing listing) {
+		this.listing = listing;
+		
 	}
 	@Override
 	public Colecao getEntity() {

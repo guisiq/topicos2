@@ -38,4 +38,5 @@ public class ColecaoRepo extends Repository<Colecao>{
 		}
 
 	}
+	
 }

@@ -1,29 +1,28 @@
-<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/menuUsuario.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
-	
-	<ui:define name="cabeca">
-		<title>Minhas Colecoes</title>
-	</ui:define>
-	<ui:define name="corpo">
-		
-	
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+        <title>Minhas colecoe DL</title>
+</h:head>
 
+<h:body>
 	<!--http://primefaces.org/showcase/ui/data/datatable/expansion.xhtml?jfwid=1c262-->
 	<!--http://primefaces.org/showcase/ui/data/datatable/crud.xhtml?jfwid=1c262-->
 	<h:form id="form">
 		<div class="card crud-demo">
 			<p:growl id="messages" showDetail="true"/>
 	
+			
+	
 			<p:dataTable 	id="dt-colecaos" 
 							widgetVar="dtColecaos" 
 							var="Colecao"  
-							value="#{minhasColecoesController.colecoes}"
+							value="#{minhasColecoesDLController.colecoes}"
 						 	reflow="true"  
-						 	selection="#{minhasColecoesController.colecoesSelection}" 
+						 	selection="#{minhasColecoesDLController.colecoesSelection}" 
 							rowKey="#{Colecao.id}" 	
 							paginator="true"
 						 	rows="10" 	  
@@ -38,7 +37,7 @@
 							<p:inputText id="globalFilter" onkeyup="PF('dtColecaos').filter()" placeholder="Search"/>
 						</span>
 
-						<p:commandButton value="New" 
+						<p:commandButton 	value="New" 
 										icon="pi pi-plus" 
 										actionListener="#{minhasColecoesDLController.openNew}"
 									 	update=":form:manage-colecao-content" 
@@ -50,13 +49,18 @@
 	
 					</div>
 				</f:facet>
+
+				<p:ajax event="rowSelect" listener="#{minhasColecoesDLController.listing.select(Colecao.id)}"/>
+				
 				<p:column style="width:2rem">
                 	<p:rowToggler/>
             	</p:column>
 				<p:column selectionMode="multiple" exportable="false"></p:column>
 				<!-- titulo -->
 				<p:column headerText="titulo" sortBy="#{Colecao.titulo}" filterBy="#{Colecao.titulo}">
-					<h:outputText value="#{Colecao.titulo}"/>
+					<p:commandLink value="#{Colecao.titulo}"
+									actionListener="#{minhasColecoesDLController.listing.select(Colecao.id)}"
+									process="@this" update="@form" />
 				</p:column>
 				<!-- publica -->
 				<p:column headerText="publica" sortBy="#{Colecao.publica}" >
@@ -72,11 +76,6 @@
 					<p:outputLabel>teste</p:outputLabel>               
 					<p:inputText value = "tesewewe"></p:inputText>               
             	</p:rowExpansion>
-				<!-- livros -->
-<!-- 				
-				<p:column headerText="livros" sortBy="#{Colecao.livros}">
-					<h:outputText value="#{Colecao.livros}"/>
-				</p:column> -->
 
 				<p:column exportable="false">
 					
@@ -85,7 +84,7 @@
 									 	oncomplete="PF('manageColecaoDialog').show()"
 									 	styleClass="edit-button rounded-button ui-button-success" 
 										process="@this">
-						<f:setPropertyActionListener value ="#{Colecao}" target="#{minhasColecoesController.entity}" />
+						<f:setPropertyActionListener value ="#{Colecao}" target="#{minhasColecoesDLController.entity}" />
 						<p:resetInput target=":form:manage-colecao-content"/>
 					</p:commandButton>
 					<!--  -->
@@ -93,9 +92,9 @@
 									 icon="pi pi-trash" 
 									 process="@this"
 									 update="dt-colecaos"
-									 actionListener="#{minhasColecoesController.deleteColecao(Colecao)}">
+									 actionListener="#{minhasColecoesDLController.deleteColecao(Colecao)}">
 									 <!-- oncomplete="PF('deleteColecaoDialog').show()" -->
-						<f:setPropertyActionListener value ="#{Colecao}" target = "#{minhasColecoesController.entity}"/>
+						<f:setPropertyActionListener value ="#{Colecao}" target = "#{minhasColecoesDLController.entity}"/>
 					</p:commandButton>
 				</p:column>
 	
@@ -111,15 +110,15 @@
 						<!--titulo-->
 						<div class="p-field">
 							<p:outputLabel for="titulo">Titulo</p:outputLabel>
-							<p:inputText id="titulo" value="#{minhasColecoesController.entity.titulo}"/>
+							<p:inputText id="titulo" value="#{minhasColecoesDLController.entity.titulo}"/>
 						</div>
 						<!--titulo-->
 						<div class="p-field">
 							<p:outputLabel for="descricao">Descricao</p:outputLabel>
-							<p:inputTextarea rows="5" cols="30" id="descricao" value="#{minhasColecoesController.entity.descricao}"/>
+							<p:inputTextarea rows="5" cols="30" id="descricao" value="#{minhasColecoesDLController.entity.descricao}"/>
 						</div>
 						<!-- privado? -->
-						<p:selectOneRadio id="city" value="#{minhasColecoesController.entity.publica}" layout="grid" columns="1" styleClass="grid-radio">
+						<p:selectOneRadio id="city" value="#{minhasColecoesDLController.entity.publica}" layout="grid" columns="1" styleClass="grid-radio">
 							<f:selectItem itemLabel="publica" itemValue="#{true}"/>
 							<f:selectItem itemLabel="privada" itemValue="#{false}"/>
 						</p:selectOneRadio>
@@ -129,7 +128,7 @@
 	
 				<f:facet name="footer">
 					<p:commandButton value="Save" icon="pi pi-check" 
-									 actionListener="#{minhasColecoesController.saveColecao}"
+									 actionListener="#{minhasColecoesDLController.saveColecao}"
 									 update="manage-colecao-content dt-colecaos" 
 									 process="manage-colecao-content @this"
 									 />
@@ -146,7 +145,7 @@
 							 message="excluir o  Colecao?" 
 							 header="Confirm" 
 							 severity="warn">
-				<p:commandButton value="confirma" icon="pi pi-check" actionListener="#{minhasColecoesController.deleteColecao}"
+				<p:commandButton value="confirma" icon="pi pi-check" actionListener="#{minhasColecoesDLController.deleteColecao}"
 								 process="@this" oncomplete="PF('deleteColecaoDialog').hide()"/>
 				<p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
 								 onclick="PF('deleteColecaoDialog').hide()"/>
@@ -159,5 +158,6 @@
 			</p:confirmDialog>
 		</div>
 	</h:form>
-</ui:define>
-</ui:composition>
+</h:body>
+</html>
+

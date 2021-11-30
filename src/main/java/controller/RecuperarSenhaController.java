@@ -13,6 +13,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import org.primefaces.PrimeFaces;
+import org.primefaces.event.FlowEvent;
 
 import application.Email;
 import application.RepositoryException;
@@ -34,6 +35,7 @@ public class RecuperarSenhaController  implements Serializable{
 	private String senha;
 	private String senha2;
 	private String codigo;
+	private boolean skip = false ;
 
 	private Usuario usuario;
 
@@ -51,7 +53,7 @@ public class RecuperarSenhaController  implements Serializable{
 		try {
 			usuario = repo.findByEmail(email);
 		} catch (RepositoryException e) {
-			Util.addErrorMessage("Email não encontrado.");
+			Util.addErrorMessage("Email nï¿½o encontrado.");
 			return;
 		}
 		String codigo = gerarCodico();
@@ -68,7 +70,7 @@ public class RecuperarSenhaController  implements Serializable{
 			repoRecuperar.save(entity);
 			Email email = new Email(usuario.getEmail(), 
 									"Esqueceu a Senha",
-									" \n o seu codigo de recuperacï¿½o de senha:"+codigo);
+									" \n o seu codigo de recuperacão de senha:"+codigo);
 			email.enviar();
 			Util.addInfoMessage("O codigo foi enviado para o seu email.");
 		} catch (RepositoryException e) {
@@ -77,7 +79,15 @@ public class RecuperarSenhaController  implements Serializable{
 		}
 		
 	}
-	
+	public String onFlowProcess(FlowEvent event) {
+        if (skip) {
+            skip = false; //reset in case user goes back
+            return "confirm";
+        }
+        else {
+            return event.getNewStep();
+        }
+    }
 	private boolean validarCodigo() {
 		try {
 			return !repoRecuperar.getbycodigo(getCodigo()).isEmpty();

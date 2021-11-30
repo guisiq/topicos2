@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import application.JPAUtil;
 import application.RepositoryException;
 
-public class livroRepo extends Repository<Livro>{
+public class LivroRepo extends Repository<Livro>{
     
     public List<Livro> getAll() throws RepositoryException {
 		Class clazz = Livro.class;

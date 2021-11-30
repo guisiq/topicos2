@@ -1,186 +1,160 @@
-<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/menuUsuario.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" template="/menuUsuario.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
-	
+
 	<ui:define name="cabeca">
 		<title>meus livros</title>
 	</ui:define>
 	<ui:define name="corpo">
-		
-	
 
-	<!--http://primefaces.org/showcase/ui/data/datatable/expansion.xhtml?jfwid=1c262-->
-	<!--http://primefaces.org/showcase/ui/data/datatable/crud.xhtml?jfwid=1c262-->
-	<h:form id="form">
-		<div class="card crud-demo">
-			<p:growl id="messages" showDetail="true"/>
-	
-			<p:toolbar>
-				<p:toolbarGroup>
-					<p:commandButton 	value="New" 
-										icon="pi pi-plus" 
-										actionListener="#{meusLivrosController.openNew}"
-									 	update=":form:manage-livro-content" 
-										oncomplete="PF('managelivroDialog').show()"
-									 	styleClass="ui-button-success" 
-										style="margin-right: .5rem">
-						<p:resetInput target=":form:manage-livro-content"/>
-					</p:commandButton>
-					<p:commandButton 	value="delete" 
-										icon="pi pi-minus"
-									 	update=":form:manage-livro-content" 
-										oncomplete="PF('deletelivroDialog').show()"
-									 	styleClass="ui-button-danger" 
-										style="margin-right: .5rem">
-						<p:resetInput target=":form:manage-livro-content"/>
-					</p:commandButton>
-				</p:toolbarGroup>
-			</p:toolbar>
-	
-			<p:dataTable 	id="dt-livros" 
-							widgetVar="dtlivros" 
-							var="livro" 
-							value="#{meusLivrosController.livros}"
-						 	reflow="true" 
-						 	selection="#{meusLivrosController.livrosSelection}" 
-							rowKey="#{livro.id}" 	
-							paginator="true"
-						 	rows="10" 	
-							rowSelectMode="add" 
-							paginatorPosition="bottom">
-				<f:facet name="header">
-					<div class="livros-table-header">
-						<span style="font-weight: bold">livros</span>
-	
-						<span class="filter-container ui-input-icon-left">
-							<i class="pi pi-search"></i>
-							<p:inputText id="globalFilter" onkeyup="PF('dtlivros').filter()" placeholder="Search"/>
-						</span>
-	
-					</div>
-				</f:facet>
-	
-				
-	
-				<p:column selectionMode="multiple" exportable="false"></p:column>
-				<!-- titulo -->
-				<p:column headerText="titulo" sortBy="#{livro.titulo}" filterBy="#{livro.titulo}">
-					<h:outputText value="#{livro.titulo}"/>
-				</p:column>
-				<!--autor -->
-				<p:column headerText="autor" sortBy="#{livro.autor}" >
-					<h:outputText value="#{livro.autor}"/>
-				</p:column>
-				<!--edicao-->
-				<p:column headerText="edicao" 
-						  sortBy="#{livro.edicao}"
-						  filterBy="#{livro.edicao}"
-						  >
-					<h:outputText value="#{livro.edicao}" style="font-weight: 700">
-						<f:convertNumber />
-					</h:outputText>
-				</p:column>
-				<!--genero-->
-				<p:column headerText="Genero" sortBy="#{livro.genero}" filterBy="#{livro.genero}">
-					<h:outputText value="#{livro.genero}"/>
-				</p:column>
 
-				<p:column exportable="false">
-					<!-- editar -->
-					<p:commandButton 	icon="pi pi-pencil" 
-										update=":form:manage-livro-content"
-									 	oncomplete="PF('managelivroDialog').show()"
-									 	styleClass="edit-button rounded-button ui-button-success" 
-										process="@this">
-						<f:setPropertyActionListener value ="#{livro}" target="#{meusLivrosController.entity}" />
-						<p:resetInput target=":form:manage-livro-content"/>
-					</p:commandButton>
-					<!-- excluir -->
-					<p:commandButton class="ui-button-warning rounded-button" 
-									 icon="pi pi-trash" 
-									 process="@this"
-									 update="dt-livros"
-									 actionListener="#{meusLivrosController.deletelivro(livro)}">
-									 <!-- oncomplete="PF('deletelivroDialog').show()" -->
-						<p:confirm 	header="Confirmação" 
-									message="Deseja realmente excluir o usuário?" 
-									icon="pi pi-exclamation-triangle"/>
-						<f:setPropertyActionListener value ="#{livro}" target = "#{meusLivrosController.entity}"/>
-					</p:commandButton>
-				</p:column>
-	
-			</p:dataTable>
-	
-			<p:dialog 	header="livro Details" 
-						showEffect="fade" 
-						modal="true"
-					  	widgetVar="managelivroDialog" 
-						responsive="true">
-				<p:outputPanel id="manage-livro-content" class="ui-fluid">
-					<p:outputPanel>
-						<!--titulo-->
-						<div class="p-field">
-							<p:outputLabel for="titulo">Titulo</p:outputLabel>
-							<p:inputText id="titulo" value="#{meusLivrosController.entity.titulo}"/>
-						</div>
-						<!--sinopse-->
-						<div class="p-field">
-							<p:outputLabel for="sinopse">Sinopse</p:outputLabel>
-							<p:inputTextarea id="sinopse" value="#{meusLivrosController.entity.sinopse}"/>
-						</div>
-						<!--edicao-->
-						<div class="p-field">
-							<p:outputLabel for="edicao">Edicao</p:outputLabel>
-							<p:inputNumber id="edicao" value="#{meusLivrosController.entity.edicao}" decimalPlaces="0"/>
-						</div>
-						<!-- Genero -->
-						<div class="p-field">
-							<p:outputLabel for="Genero">Genero</p:outputLabel>
-							<!--http://www.primefaces.org:8080/showcase/ui/input/oneRadio.xhtml?jfwid=1f7ce-->
-							<p:selectOneRadio id="Genero" value="#{meusLivrosController.entity.genero}" layout="grid" columns="3" styleClass="grid-radio">
-								<f:selectItems value="#{meusLivrosController.generos}" var="genero" itemLabel="#{genero.name()}" itemValue="#{genero}"/>
-							</p:selectOneRadio>
-							
-						</div>
 
+		<!--http://primefaces.org/showcase/ui/data/datatable/expansion.xhtml?jfwid=1c262-->
+		<!--http://primefaces.org/showcase/ui/data/datatable/crud.xhtml?jfwid=1c262-->
+		<h:form id="form">
+			<div class="card crud-demo">
+				<p:growl id="messages" showDetail="true" />
+
+				<p:toolbar>
+					<p:toolbarGroup>
+						<p:commandButton value="New" icon="pi pi-plus" actionListener="#{meusLivrosController.openNew}"
+							update=":form:manage-livro-content" oncomplete="PF('managelivroDialog').show()"
+							styleClass="ui-button-success" style="margin-right: .5rem">
+							<p:resetInput target=":form:manage-livro-content" />
+						</p:commandButton>
+						<p:commandButton value="delete" icon="pi pi-minus" update=":form:manage-livro-content"
+							oncomplete="PF('deletelivroDialog').show()" styleClass="ui-button-danger"
+							style="margin-right: .5rem">
+							<p:resetInput target=":form:manage-livro-content" />
+						</p:commandButton>
+					</p:toolbarGroup>
+				</p:toolbar>
+
+				<p:dataTable id="dt-livros" widgetVar="dtlivros" var="livro" value="#{meusLivrosController.livros}"
+					reflow="true" selection="#{meusLivrosController.livrosSelection}" rowKey="#{livro.id}"
+					paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom">
+					<f:facet name="header">
+						<div class="livros-table-header">
+							<span style="font-weight: bold">livros</span>
+
+							<span class="filter-container ui-input-icon-left">
+								<i class="pi pi-search"></i>
+								<p:inputText id="globalFilter" onkeyup="PF('dtlivros').filter()" placeholder="Search" />
+							</span>
+
+						</div>
+					</f:facet>
+
+
+
+					<p:column selectionMode="multiple" exportable="false"></p:column>
+					<!-- titulo -->
+					<p:column headerText="titulo" sortBy="#{livro.titulo}" filterBy="#{livro.titulo}">
+						<h:outputText value="#{livro.titulo}" />
+					</p:column>
+					<!--autor -->
+					<p:column headerText="autor" sortBy="#{livro.autor}">
+						<h:outputText value="#{livro.autor}" />
+					</p:column>
+					<!--edicao-->
+					<p:column headerText="edicao" sortBy="#{livro.edicao}" filterBy="#{livro.edicao}">
+						<h:outputText value="#{livro.edicao}" style="font-weight: 700">
+							<f:convertNumber />
+						</h:outputText>
+					</p:column>
+					<!--genero-->
+					<p:column headerText="Genero" sortBy="#{livro.genero}" filterBy="#{livro.genero}">
+						<h:outputText value="#{livro.genero}" />
+					</p:column>
+
+					<p:column exportable="false">
+						<!-- editar -->
+						<p:commandButton icon="pi pi-pencil" update=":form:manage-livro-content"
+							oncomplete="PF('managelivroDialog').show()"
+							styleClass="edit-button rounded-button ui-button-success" process="@this">
+							<f:setPropertyActionListener value="#{livro}" target="#{meusLivrosController.entity}" />
+							<p:resetInput target=":form:manage-livro-content" />
+						</p:commandButton>
+						<!-- excluir -->
+						<p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
+							update="dt-livros" actionListener="#{meusLivrosController.deletelivro(livro)}">
+							<!-- oncomplete="PF('deletelivroDialog').show()" -->
+							<p:confirm header="Confirmação" message="Deseja realmente excluir o usuário?"
+								icon="pi pi-exclamation-triangle" />
+							<f:setPropertyActionListener value="#{livro}" target="#{meusLivrosController.entity}" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+				<p:dialog header="livro Details" showEffect="fade" modal="true" widgetVar="managelivroDialog"
+					responsive="true">
+					<p:outputPanel id="manage-livro-content" class="ui-fluid">
+						<p:outputPanel>
+							<!-- imagen de capa -->
+							<h:form enctype="multipart/form-data">
+
+								<p:fileUpload id="fileUpload" listener="#{meusLivrosController.upload}" mode="advanced"
+									update="fileUpload @form" label="Selecione uma foto ..." global="false">
+								</p:fileUpload>
+								<p:growl id="messages" showDetail="true" />
+							</h:form>
+							<!--titulo-->
+							<div class="p-field">
+								<p:outputLabel for="titulo">Titulo</p:outputLabel>
+								<p:inputText id="titulo" value="#{meusLivrosController.entity.titulo}" />
+							</div>
+							<!--sinopse-->
+							<div class="p-field">
+								<p:outputLabel for="sinopse">Sinopse</p:outputLabel>
+								<p:inputTextarea id="sinopse" value="#{meusLivrosController.entity.sinopse}" />
+							</div>
+							<!--edicao-->
+							<div class="p-field">
+								<p:outputLabel for="edicao">Edicao</p:outputLabel>
+								<p:inputNumber id="edicao" value="#{meusLivrosController.entity.edicao}"
+									decimalPlaces="0" />
+							</div>
+							<!-- Genero -->
+							<div class="p-field">
+								<p:outputLabel for="Genero">Genero</p:outputLabel>
+								<!--http://www.primefaces.org:8080/showcase/ui/input/oneRadio.xhtml?jfwid=1f7ce-->
+								<p:selectOneRadio id="Genero" value="#{meusLivrosController.entity.genero}"
+									layout="grid" columns="3" styleClass="grid-radio">
+									<f:selectItems value="#{meusLivrosController.generos}" var="genero"
+										itemLabel="#{genero.name()}" itemValue="#{genero}" />
+								</p:selectOneRadio>
+
+							</div>
+
+						</p:outputPanel>
 					</p:outputPanel>
-				</p:outputPanel>
-	
-				<f:facet name="footer">
-					<p:commandButton value="Save" icon="pi pi-check" 
-									 actionListener="#{meusLivrosController.savelivro}"
-									 update="manage-livro-content dt-livros" 
-									 process="manage-livro-content @this"
-									 />
-					<p:commandButton value="Cancel" icon="pi pi-times" 
-					
-									 onclick="PF('managelivroDialog').hide()"
-									 class="ui-button-secondary"/>
-				</f:facet>
 
-			</p:dialog>
-	
-			<p:confirmDialog widgetVar="deletelivroDialog" 
-							 showEffect="fade" 
-							 width="300"
-							 message="excluir o  livro?" 
-							 header="Confirm" 
-							 severity="warn">
-				<p:commandButton value="confirma" icon="pi pi-check" actionListener="#{meusLivrosController.deletelivro}"
-								 process="@this" oncomplete="PF('deletelivroDialog').hide()"/>
-				<p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-								 onclick="PF('deletelivroDialog').hide()"/>
-			</p:confirmDialog>
-	
-			<p:confirmDialog global="true" showEffect="fade" width="300">
-				<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
-				<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
-								 icon="pi pi-times"/>
-			</p:confirmDialog>
-		</div>
-	</h:form>
-</ui:define>
+					<f:facet name="footer">
+						<p:commandButton value="Save" icon="pi pi-check"
+							actionListener="#{meusLivrosController.savelivro}" update="manage-livro-content dt-livros"
+							process="manage-livro-content @this" />
+						<p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('managelivroDialog').hide()"
+							class="ui-button-secondary" />
+					</f:facet>
+
+				</p:dialog>
+
+				<p:confirmDialog widgetVar="deletelivroDialog" showEffect="fade" width="300" message="excluir o  livro?"
+					header="Confirm" severity="warn">
+					<p:commandButton value="confirma" icon="pi pi-check"
+						actionListener="#{meusLivrosController.deletelivro}" process="@this"
+						oncomplete="PF('deletelivroDialog').hide()" />
+					<p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+						onclick="PF('deletelivroDialog').hide()" />
+				</p:confirmDialog>
+
+				<p:confirmDialog global="true" showEffect="fade" width="300">
+					<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+					<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+						icon="pi pi-times" />
+				</p:confirmDialog>
+			</div>
+		</h:form>
+	</ui:define>
 </ui:composition>
