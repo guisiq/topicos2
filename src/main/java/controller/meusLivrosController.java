@@ -114,7 +114,7 @@ public class MeusLivrosController extends CRUDController<Livro> implements Seria
 			}
 			if (getFotoInputStream() != null) {
 				// salvando a imagem
-				if (!Util.saveImageUsuario(fotoInputStream, "png", getEntity().getId())) {
+				if (!Util.saveImageCapaLivro(fotoInputStream, "png", getEntity().getId())) {
 					Util.addErrorMessage("Erro ao salvar. N�o foi poss�vel salvar a imagem do usu�rio.");
 					return;
 				}

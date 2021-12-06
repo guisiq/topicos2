@@ -18,6 +18,7 @@ public class ImgCapaLivroServlet extends HttpServlet {
 	public static final String PATH_IMAGES = File.separator + "images";
 	// /images/capa-livro
 	public static final String PATH_IMAGES_CAPA_LIVRO = PATH_IMAGES + File.separator + "capa_livro";
+    public static final String PATH_IMAGES_USUARIO =PATH_IMAGES + File.separator + "perfil_usuario";
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

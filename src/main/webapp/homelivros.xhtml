@@ -1,56 +1,53 @@
-<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/menuUsuario.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
-	
-	<ui:define name="cabeca">
-		<title>home </title>
-	</ui:define>
-	<ui:define name="corpo">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" template="/menuUsuario.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core">
 
-    <div class="content ">
-        <h:form id="form">
-        <div class="p-grid">
-        <p:repeat value="#{livroController.livros}" var="livro">
-            <!-- https://primefaces.github.io/primefaces/11_0_0/#/components/gridcss-->
-            <!-- https://www.primefaces.org/showcase/ui/panel/card.xhtml?jfwid=59c8a -->
-            <!-- https://www.primefaces.org/showcase/ui/panel/panelGrid.xhtml?jfwid=e3c93 -->
-            <!-- <p:card class="ui-g-12 ui-md-6 ui-lg-4 ui-xl-3" style="width: 25em ;margin-bottom: 2em;height: 100%;">  -->
-            <p:card class="p-col-12 p-md-6 p-lg-3" style="width: 25em ;margin-bottom: 2em;height: 100%;"> 
-                
-                <f:facet name="header">
-                    <img alt="imagem capa" src="/topicos2/img-capa-livro?nome=#{livro.id}.png" />
-                </f:facet>
-                <f:facet name="title">
-                    titulo :#{livro.titulo}
-                </f:facet>
-                <f:facet name="subtitle">
-                    autor: #{livro.autor}
-                </f:facet>
-                
-                <p>
-                    #{livro.sinopse}
-                </p>
+    <ui:define name="cabeca">
+        <title>home </title>
+    </ui:define>
+    <ui:define name="corpo">
 
-                <f:facet name="footer">
-                    
-                    <p:commandButton id="ajax" process="@this"
-						update="@form" value="salvar"
-						actionListener="#{livroController.abrirColecaoListing}">
-						<p:ajax event="dialogReturn"
-							listener="#{livroController.obterColecaoListing}" process="@this"
-							update="@form" />
-					</p:commandButton >
-                    <p:commandButton icon="pi pi-check" value="ler" />
-                </f:facet>
+        <div class="content ">
+            <h:form id="form">
+                <div class="p-grid">
+                    <p:repeat value="#{homeLivrosController.livros}" var="livro">
+                        <!-- https://primefaces.github.io/primefaces/11_0_0/#/components/gridcss-->
+                        <!-- https://www.primefaces.org/showcase/ui/panel/card.xhtml?jfwid=59c8a -->
+                        <!-- https://www.primefaces.org/showcase/ui/panel/panelGrid.xhtml?jfwid=e3c93 -->
+                        <!-- <p:card class="ui-g-12 ui-md-6 ui-lg-4 ui-xl-3" style="width: 25em ;margin-bottom: 2em;height: 100%;">  -->
+                        <p:card class="p-col-12 p-md-6 p-lg-3" style="width: 25em ;margin-bottom: 2em;margin: 1em; FLOAT: left;">
 
-            </p:card>
+                            <f:facet name="header">
+                                <img alt="imagem capa" src="/topicos2/img-capa-livro?nome=#{livro.id}.png" />
+                            </f:facet>
+                            <f:facet name="title">
+                                titulo :#{livro.titulo}
+                            </f:facet>
+                            <f:facet name="subtitle">
+                                autor: #{livro.autor}
+                            </f:facet>
 
-        </p:repeat>
+                            <p>
+                                #{livro.sinopse}
+                            </p>
+
+                            <f:facet name="footer">
+
+                                <p:commandButton id="ajax" process="@this" update="@form" value="salvar"
+                                    actionListener="#{homeLivrosController.abrirColecaoListing}">
+                                    <p:ajax event="dialogReturn" listener="#{homeLivrosController.obterColecaoListing}"
+                                        process="@this" update="@form" />
+                                </p:commandButton>
+                                <p:commandButton icon="pi pi-check"
+                                actionListener="#{homeLivrosController.ler(livro)}"
+                                value="ler" />
+                            </f:facet>
+
+                        </p:card>
+
+                    </p:repeat>
+                </div>
+            </h:form>
         </div>
-    </h:form>
-    </div>
-</ui:define>
+    </ui:define>
 </ui:composition>

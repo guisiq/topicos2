@@ -45,6 +45,7 @@ public abstract class CRUDController<T extends DefaultEntity> {
 	public void salvar() {
 		Repository<T> repo = new Repository<T>();
 		try {
+			System.out.println(getEntity());
 			repo.save(getEntity());
 			limpar();
 			Util.addInfoMessage("Usuario salvo com sucesso.");

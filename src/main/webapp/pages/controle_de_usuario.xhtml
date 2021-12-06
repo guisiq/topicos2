@@ -1,14 +1,78 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-<h:header></h:header>	
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" template="/menuUsuario.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core">
 
-<h:body>
-	<h1>Hello World</h1>
-	<h:inputText></h:inputText>
-</h:body>
+    <ui:define name="cabeca">
+        <title>home </title>
+	</ui:define>
+    <ui:define name="corpo">
+		<h:form >
+			<p:growl id="growl" showDetail="false" />
+			<div styleClass="p-d-flex p-jc-center">
+			<p:panel  styleClass="ui-g-12 ui-md-6 ui-lg-3 p-mr-2 ">
+				<f:facet name="header">
+					<div>
+						<div align="center" style="width: 85%; display: inline-block;">
+							<h1>Cadastro de Usuário</h1>
+						</div>
+						<div align="right" style="float: right; position: relative;">
+							<img class="img-responsive"
+							 style="max-width: 80px!important;max-height: 80px!important;"            
+							 src="/salaaula/pages/img-usuario?nome=#{usuarioController.entity.id}.png"/>
+						</div>
+					</div>				
+				</f:facet>
+			
+				<p:panelGrid columns="2" layout="grid"
+				columnClasses="p-col-6 p-md-1 p-xl-2"
+				contentStyleClass="p-align-baseline ui-fluid">
+					<p:outputLabel value="Nome:"/>
+					
+						<p:inputText style="width:185px"
+							value="#{usuarioController.entity.nome}"
+							readonly="true"
+								/>
+					<!-- email -->
+					<p:outputLabel value="email:"/>
+					<p:inputText value="#{usuarioController.entity.email}"  />
+					<!-- telefone -->
+					<p:outputLabel value="telefone:"/>
+					<p:inputMask id="date" value="#{usuarioController.entity.telefone}" mask="(999) 999-9999" validateMask="true"/>
+					<!-- login -->
+					<p:outputLabel value="Login:"/>
+					<p:inputText value="#{usuarioController.entity.login}"/>
+					<!-- senha -->
+					<p:outputLabel value="Senha:"/>
+					<p:inputText value="#{usuarioController.entity.senha}"/>
+					<!-- imagen -->
+					<p:outputLabel value="Imagem:"/>
+					<h:form enctype="multipart/form-data" > 
+						
+						<p:fileUpload id="fileUpload"
+									  listener="#{usuarioController.upload}" 
+									  mode="advanced" 
+									  update="fileUpload @form"
+									  label="Selecione uma foto ..."
+									  global="false">
+						</p:fileUpload>
+						 <p:growl id="messages" showDetail="true"/>    
+					</h:form>
+	
+				</p:panelGrid>
+				<f:facet name="footer">
+				<h:panelGrid columns="3">
+					<p:commandButton value="Salvar auteracoes "
+						actionListener="#{usuarioController.salvar}"
+						process="@form" update="@form"/>
+						
+					<p:commandButton value="Limpar"
+						actionListener="#{usuarioController.limpar}"
+						process="@this" update="@form"/>
+				</h:panelGrid>
+			</f:facet>
+				</p:panel>
+			</div>
+	</h:form>
 
-</html>
+	</ui:define>
+</ui:composition>

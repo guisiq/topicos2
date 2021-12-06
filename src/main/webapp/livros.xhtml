@@ -1,0 +1,15 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/menuUsuario.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<ui:define name="cabeca">
+		<title>livro </title>
+	</ui:define>
+	<ui:define name="corpo">
+	<f:viewParam name="idlivro" value="#{livrosControler.livro}"></f:viewParam>
+		hello word
+    </ui:define>
+</ui:composition>
