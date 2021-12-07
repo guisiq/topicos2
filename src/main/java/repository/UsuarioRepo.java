@@ -1,12 +1,28 @@
 package repository;
 
-import entities.Usuario;
-import java.util.List;
 import javax.persistence.Query;
 
+import application.Message;
+
 import application.RepositoryException;
+import entities.Usuario;
 
 public class UsuarioRepo extends Repository<Usuario> {
+    @Override
+    public Usuario save(Usuario entity) throws RepositoryException {
+    	try {
+			
+			em.getTransaction().begin();
+			Usuario  objeto = em.merge(entity);
+			em.getTransaction().commit();
+			
+			return objeto;
+		} catch (Exception e) {
+			Message.addErrorMessage("Problemas ao executar a funo!");
+			e.printStackTrace();
+			return null;
+		}
+    }
     
     public Usuario obterUm(int id) {
 		Usuario usu = em.find(Usuario.class,id);

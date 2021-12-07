@@ -25,6 +25,7 @@ import application.Util;
 
 import entities.Perfil;
 import entities.Usuario;
+import repository.Repository;
 import repository.UsuarioRepo;
 
 @Named
@@ -65,20 +66,15 @@ public class UsuarioController extends CRUDController<Usuario> implements Serial
 
 	@Override
 	public void salvar() {
+		UsuarioRepo repo = new UsuarioRepo();
 		try {
-			super.salvar();
-			
-			if (getFotoInputStream() != null) {
-				// salvando a imagem
-				if (! Util.saveImageCapaLivro(fotoInputStream, "png", getEntity().getId())) {
-					Util.addErrorMessage("Erro ao salvar. N�o foi poss�vel salvar a imagem do usu�rio.");
-					return;
-				}
-			}
+			System.out.println(getEntity());
+			repo.save(getEntity());
 			limpar();
-		} catch (Exception e) {
-			Util.addErrorMessage("Problema ao salvar o usu�rio");
-		}	
+			Util.addInfoMessage("Usuario salvo com sucesso.");
+		} catch (RepositoryException e) {
+			Util.addErrorMessage("Problema ao salvar, tente novamente ou entre em contato com a TI.");
+		}
 		
 	}
 	

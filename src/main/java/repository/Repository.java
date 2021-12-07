@@ -21,18 +21,20 @@ public class Repository<T> {
 		try { 
 			var em = getEntityManager();
 			
-			if(!em.getTransaction().isActive())
+			if(!em.getTransaction().isActive()) 
 		        em.getTransaction().begin();
-			em.persist(entity);
-			
-			//em.getTransaction().commit();
-			//em.close();
-			
-			T e = em.merge(entity);
-			em.getTransaction().commit();
-			return e;
+				em.persist(entity);
+				
+				//em.getTransaction().commit();
+				//em.close();
+				
+				T e = em.merge(entity);
+				em.getTransaction().commit();
+				em.close();
+				return e;
 		} catch (Exception e) {
 			System.out.println("Erro ao executar o save");
+			System.out.println(e);
 			e.printStackTrace();
 			throw new RepositoryException("Erro ao Salvar");
 		}
