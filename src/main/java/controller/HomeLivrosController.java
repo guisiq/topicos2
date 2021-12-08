@@ -44,9 +44,19 @@ public class HomeLivrosController extends CRUDController<Livro> implements Seria
 	}
 
 	public void ler(Livro livro) {
-		Util.redirect("/livros.xhtml?idlivro="+livro.getId());
+		Util.redirect("/topicos2/livros.xhtml?idlivro="+livro.getId());
 	}
-
+	 
+	public void cadastrar() {
+        try {
+			repo.save(entity);
+		} catch (RepositoryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setEntity(entity);
+	}
+    
 	public List<Livro> getLivros() {
 		
 		try {
@@ -74,17 +84,6 @@ public class HomeLivrosController extends CRUDController<Livro> implements Seria
 		this.setEntity(livro);
 	}
 	
-    
-	public void cadastrar() {
-        try {
-			repo.save(entity);
-		} catch (RepositoryException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		this.setEntity(entity);
-	}
-    
     @Override
     public Livro getEntity() {
         if (entity == null)

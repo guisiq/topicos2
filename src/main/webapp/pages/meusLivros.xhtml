@@ -52,6 +52,19 @@
 					<p:column headerText="titulo" sortBy="#{livro.titulo}" filterBy="#{livro.titulo}">
 						<h:outputText value="#{livro.titulo}" />
 					</p:column>
+					<!-- capitulos -->
+					<p:column headerText="capitulos" >
+						<p:commandButton id="ajax" 
+							process="@this" 
+							update="@form" 
+							value="capitulos"
+							actionListener="#{meusLivrosController.openCapitulosDlg(livro)}">
+							<p:ajax 
+								event="dialogReturn" 
+								process="@this" 
+								update="@form" />
+                        </p:commandButton>
+					</p:column>
 					<!--autor -->
 					<p:column headerText="autor" sortBy="#{livro.autor}">
 						<h:outputText value="#{livro.autor}" />
@@ -99,7 +112,7 @@
 								</p:fileUpload>
 								<p:growl id="messages" showDetail="true" />
 							</h:form>
-							<!--titulo-->
+							<!--titulo--> 
 							<div class="p-field">
 								<p:outputLabel for="titulo">Titulo</p:outputLabel>
 								<p:inputText id="titulo" value="#{meusLivrosController.entity.titulo}" />
@@ -131,6 +144,7 @@
 					</p:outputPanel>
 
 					<f:facet name="footer">
+						
 						<p:commandButton value="Save" icon="pi pi-check"
 							actionListener="#{meusLivrosController.savelivro}" update="manage-livro-content dt-livros"
 							process="manage-livro-content @this" />
@@ -139,6 +153,8 @@
 					</f:facet>
 
 				</p:dialog>
+
+				
 
 				<p:confirmDialog widgetVar="deletelivroDialog" showEffect="fade" width="300" message="excluir o  livro?"
 					header="Confirm" severity="warn">

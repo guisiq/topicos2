@@ -31,6 +31,9 @@ public abstract class dialog<T> implements Serializable {
 	}
 
 	public void open() {
+		open( this.page); 
+	} 
+	public static void open(String page) { 
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("modal", true);
 		options.put("draggable", true);
@@ -53,8 +56,6 @@ public abstract class dialog<T> implements Serializable {
 		}
 		PrimeFaces.current().dialog().closeDynamic(obj);
 	}
-	
-	public abstract void pesquisar();
 	
 	public List<T> getList() {
 		return list;

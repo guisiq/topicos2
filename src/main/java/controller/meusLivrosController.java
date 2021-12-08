@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -16,6 +18,7 @@ import org.primefaces.model.file.UploadedFile;
 import application.RepositoryException;
 import application.Session;
 import application.Util;
+import controller.listen.dialog;
 import entities.*;
 import repository.*;
 
@@ -38,6 +41,12 @@ public class MeusLivrosController extends CRUDController<Livro> implements Seria
 	
 
 
+	public void openCapitulosDlg(Livro livro) {
+		Session.getInstance().set("livro", livro);
+		dialog.open("meusCapitulos");
+	}
+	
+	
 	public void upload(FileUploadEvent event) {
 		UploadedFile uploadFile = event.getFile();
 		System.out.println("nome arquivo: " + uploadFile.getFileName());
@@ -89,22 +98,7 @@ public class MeusLivrosController extends CRUDController<Livro> implements Seria
 		}
         
     }
-/*	
-	exemplo da documentacao 
-	public void saveProduct() {
-        if (this.selectedProduct.getCode() == null) {
-            this.selectedProduct.setCode(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
-            this.products.add(this.selectedProduct);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Product Added"));
-        }
-        else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Product Updated"));
-        }
 
-        PrimeFaces.current().executeScript("PF('manageProductDialog').hide()");
-        PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
-    }
-*/
 	public void savelivro() {
 		try {
 
@@ -129,16 +123,16 @@ public class MeusLivrosController extends CRUDController<Livro> implements Seria
 			e.printStackTrace();
 		}
 		
-	}
-
-	
+	}	
 	
 	public InputStream getFotoInputStream() {
 		return fotoInputStream;
 	}
+	
 	public void setFotoInputStream(InputStream fotoInputStream) {
 		this.fotoInputStream = fotoInputStream;
 	}
+	
 	public List<Genero> getGeneros() {
 		if(generos == null){
 			this.generos = new ArrayList<Genero>();

@@ -60,7 +60,6 @@ public class Repository<T> {
 		}
 	}
 	
-
 	public List<T> getAll(Class clazz) throws RepositoryException {
 		try { 
 			String entityName = clazz.getSimpleName();
@@ -75,7 +74,7 @@ public class Repository<T> {
 
 	}
 	
-	private EntityManager getEntityManager() {
+	protected EntityManager getEntityManager() {
 		return em;
 	}
 

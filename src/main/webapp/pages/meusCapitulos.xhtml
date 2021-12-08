@@ -1,0 +1,150 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" template="/menuUsuario.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="cabeca">
+		<title>meus Capitulos</title>
+	</ui:define>
+	<ui:define name="corpo">
+
+
+
+		<!--http://primefaces.org/showcase/ui/data/datatable/expansion.xhtml?jfwid=1c262-->
+		<!--http://primefaces.org/showcase/ui/data/datatable/crud.xhtml?jfwid=1c262-->
+		<h:form id="form">
+			<div class="card crud-demo">
+				<p:growl id="messages" showDetail="true" />
+
+				<p:toolbar>
+					<p:toolbarGroup>
+						<p:commandButton value="novo Capitulo" 
+							icon="pi pi-plus" 
+							actionListener="#{meusCapitulosController.CapituloProcimo}"
+							update=":form:manage-Capitulo-content" 
+							oncomplete="PF('manageCapituloDialog').show()"
+							styleClass="ui-button-success" 
+							style="margin-right: .5rem"
+							/>
+
+						<p:commandButton value="delete" icon="pi pi-minus" update=":form:manage-Capitulo-content"
+							oncomplete="PF('deleteCapituloDialog').show()" styleClass="ui-button-danger"
+							style="margin-right: .5rem">
+							<p:resetInput target=":form:manage-Capitulo-content" />
+						</p:commandButton>
+					</p:toolbarGroup>
+				</p:toolbar>
+
+				<p:dataTable 
+				id="dt-Capitulos" 
+				widgetVar="dtCapitulos" 
+				var="Capitulo" 
+				value="#{meusCapitulosController.capitulos}"
+				reflow="true" selection="#{meusCapitulosController.capitulosSelection}" 
+				rowKey="#{Capitulo.id}"
+				paginator="true" rows="10" 
+				rowSelectMode="add" 
+				paginatorPosition="bottom">
+					<f:facet name="header">
+						<div class="Capitulos-table-header">
+							<span style="font-weight: bold">Capitulos</span>
+
+							<span class="filter-container ui-input-icon-left">
+								<i class="pi pi-search"></i>
+								<p:inputText id="globalFilter" onkeyup="PF('dtCapitulos').filter()" placeholder="Search" />
+							</span>
+
+						</div>
+					</f:facet>
+
+
+
+					<p:column selectionMode="multiple" exportable="false"></p:column>
+					<!-- titulo -->
+					<p:column headerText="titulo" sortBy="#{Capitulo.titulo}" filterBy="#{Capitulo.titulo}">
+						<h:outputText value="#{Capitulo.titulo}" />
+					</p:column>
+					<!--texto -->
+					<p:column headerText="autor" sortBy="#{Capitulo.autor}">
+						<h:outputText value="#{Capitulo.texto}" />
+					</p:column>
+					
+					<p:column exportable="false">
+						<!-- editar -->
+						<p:commandButton 
+							icon="pi pi-pencil" 
+							update=":form:manage-Capitulo-content"
+							oncomplete="PF('manageCapituloDialog').show()"
+							styleClass="edit-button rounded-button ui-button-success" 
+							process="@this">
+							<f:setPropertyActionListener value="#{Capitulo}" target="#{meusCapitulosController.entity}" />
+							<p:resetInput target=":form:manage-Capitulo-content" />
+						</p:commandButton>
+						<!-- excluir -->
+						<p:commandButton class="ui-button-warning rounded-button" 
+							icon="pi pi-trash" 	
+							process="@this"
+							update="dt-Capitulos" 
+							actionListener="#{meusCapitulosController.deleteCapitulo(Capitulo)}">
+							<!-- oncomplete="PF('deleteCapituloDialog').show()" -->
+							<p:confirm header="Confirmação" message="Deseja realmente excluir o usuário?"
+								icon="pi pi-exclamation-triangle" />
+							<f:setPropertyActionListener value="#{Capitulo}" target="#{meusCapitulosController.entity}" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+				<p:dialog header="Capitulo Details" showEffect="fade" modal="true" widgetVar="manageCapituloDialog"
+					responsive="true">
+					<p:outputPanel id="manage-Capitulo-content" class="ui-fluid">
+						<p:outputPanel>
+							
+							<!--titulo-->
+							<div class="p-field">
+								<p:outputLabel for="tituloCapitulo">Titulo</p:outputLabel>
+								<p:inputText id="tituloCapitulo" value="#{meusCapitulosController.entity.titulo}" />
+							</div>
+							
+							<!-- corpo -->
+							<div class="p-field">
+								<p:outputLabel for="Capitulo">Titulo</p:outputLabel>
+								<p:inputText id="Capitulo" value="#{meusCapitulosController.entity.texto}" />
+							</div>
+							
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<f:facet name="footer">
+						
+						<p:commandButton value="Save" icon="pi pi-check"
+							actionListener="#{meusCapitulosController.saveCapitulo}" update="manage-Capitulo-content dt-Capitulos"
+							process="manage-Capitulo-content @this" />
+						<p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageCapituloDialog').hide()"
+							class="ui-button-secondary" />
+					</f:facet>
+					
+						
+
+				</p:dialog>
+
+				
+
+				<p:confirmDialog widgetVar="deleteCapituloDialog" showEffect="fade" width="300" message="excluir o  Capitulo?"
+					header="Confirm" severity="warn">
+					<p:commandButton value="confirma" icon="pi pi-check"
+						actionListener="#{meusCapitulosController.deleteCapitulo}" process="@this"
+						oncomplete="PF('deleteCapituloDialog').hide()" />
+					<p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+						onclick="PF('deleteCapituloDialog').hide()" />
+				</p:confirmDialog>
+
+				<p:confirmDialog global="true" showEffect="fade" width="300">
+					<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+					<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+						icon="pi pi-times" />
+				</p:confirmDialog>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

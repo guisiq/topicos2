@@ -9,7 +9,27 @@
 		<title>livro </title>
 	</ui:define>
 	<ui:define name="corpo">
-	<f:viewParam name="idlivro" value="#{livrosControler.livro}"></f:viewParam>
-		hello word
+	<f:viewParam name="idlivro" value="#{livroControler.livroid}"></f:viewParam>
+	<p:panel>
+		<article>
+			<header>
+				<div>
+				<h2>
+					#{livroControler.livro.titulo}
+				</h2>
+				<div>
+					#{livroControler.livro.autor}
+				</div>
+				<div>
+					#{livroControler.livro.sinipse}	
+				</div>
+				</div>
+			</header>
+			<p:divider />
+			<p:repeat value="#{livroControler.livro.capitulos}" var="capitulos">
+			</p:repeat>
+		</article>
+	</p:panel>
+		
     </ui:define>
 </ui:composition>

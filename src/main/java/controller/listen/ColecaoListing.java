@@ -22,11 +22,5 @@ public class ColecaoListing extends dialog<Colecao> {
 		super("pages/milhasColecoesDL", new ColecaoRepo());
 	}
 
-	@Override
-	public void pesquisar() {
-		
-
-	}
-
 
 }

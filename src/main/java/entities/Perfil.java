@@ -22,6 +22,7 @@ public enum Perfil {
 		paginasComPermissao.add("/topicos2/pages/milhasColecoes.xhtml");
 		paginasComPermissao.add("/topicos2/pages/milhasColecoesDL.xhtml");
 		paginasComPermissao.add("/topicos2/pages/controle_de_usuario.xhtml");
+		paginasComPermissao.add("/topicos2/pages/meusCapitulos.xhtml");
 		
 		switch (id) {
 		case 1:
