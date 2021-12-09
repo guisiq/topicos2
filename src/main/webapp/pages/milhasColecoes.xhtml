@@ -82,19 +82,7 @@
 					<p:column headerText="titulo" sortBy="#{livro.titulo}" filterBy="#{livro.titulo}">
 						<h:outputText value="#{livro.titulo}" />
 					</p:column>
-					<!-- capitulos -->
-					<p:column headerText="capitulos" >
-						<p:commandButton id="ajax" 
-							process="@this" 
-							update="@form" 
-							value="capitulos"
-							actionListener="#{meusLivrosController.openCapitulosDlg(livro)}">
-							<p:ajax 
-								event="dialogReturn" 
-								process="@this" 
-								update="@form" />
-                        </p:commandButton>
-					</p:column>
+					
 					<!--autor -->
 					<p:column headerText="autor" sortBy="#{livro.autor}">
 						<h:outputText value="#{livro.autor}" />
