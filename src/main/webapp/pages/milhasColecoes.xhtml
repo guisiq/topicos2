@@ -78,6 +78,16 @@
 					rowKey="#{livro.id}"
 					 
 					>
+					<p:column exportable="false">
+					<p:commandButton styleClass="edit-button rounded-button ui-button-success" 
+					 icon="pi pi-eye" 
+					 process="@this"
+					 update="dt-livros"
+					 actionListener="#{minhasColecoesController.ler(livro.id)}">
+									 <!-- oncomplete="PF('deleteColecaoDialog').show()" -->
+						<f:setPropertyActionListener value ="#{Colecao}" target = "#{minhasColecoesController.entity}"/>
+					</p:commandButton>
+					</p:column>
 					<!-- titulo -->
 					<p:column headerText="titulo" sortBy="#{livro.titulo}" filterBy="#{livro.titulo}">
 						<h:outputText value="#{livro.titulo}" />
