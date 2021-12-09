@@ -59,10 +59,10 @@ public class menuController {
         Util.redirect("/topicos2/homelivros.xhtml");
 	}
     public void meuslivro() {
-    	Util.redirect("/topicos2/meuslivros.xhtml");
+    	Util.redirect("/topicos2/pages/meusLivros.xhtml");
     }
     public void minhasColecoes() {
-    	Util.redirect("/topicos2/minhasColecoes.xhtml");
+    	Util.redirect("/topicos2/pages/minhasColecoes.xhtml");
     }
 
 	public String getFiltro() {

@@ -25,8 +25,8 @@ public enum Perfil {
 		paginasComPermissao.add("/topicos2/pages/meusCapitulos.xhtml");
 		
 		switch (id) {
-		case 1:
-			paginasComPermissao.add("/topicos2/pages/controle_de_usuario.xhtml");			
+		case 1:		
+			paginasComPermissao.add("/topicos2/pages/gerenciamento_usuario.xhtml");			
 			break;
 		default:
 			break;

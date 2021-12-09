@@ -6,37 +6,46 @@
 </h:head>
 
 <h:body>
+	
 	<h:form >
-		<p:outputPanel id="cadastro" >
-			<p:outputPanel>
-				<div >
-					<!--nome-->
-					<div class="p-field">
-						<p:outputLabel for="nome">nome</p:outputLabel>
-						<p:inputText id="nome" value="#{cadastroController.entity.nome}" />
-					</div>
-					<!--login-->
-					<div class="p-field">
-						<p:outputLabel for="login">login</p:outputLabel>
-						<p:inputText id="login" value="#{cadastroController.entity.login}" />
-					</div>
-					<!--senha-->
-					<div class="p-field">
-						<p:outputLabel for="senha">senha</p:outputLabel>
-						<p:inputText id="senha" value="#{cadastroController.entity.senha}" />
-					</div>
-					<!--email-->
-					<div class="p-field">
-						<p:outputLabel for="email">email</p:outputLabel>
-						<p:inputText id="email" value="#{cadastroController.entity.email}" />
-					</div>
-					<!--telefone-->
-					<div class="p-field">
-						<p:outputLabel for="telefone">telefone</p:outputLabel>
-						<p:inputText id="telefone" value="#{cadastroController.entity.telefone}" />
-					</div>
-
+			<p:growl id="growl" showDetail="false" />
+			<div styleClass="">
+			<p:panel  styleClass="ui-g-12 ui-md-6 ui-lg-3 p-mr-2 ">
+				<f:facet name="header">
+					<div>
+						<div align="center" style="width: 85%; display: inline-block;">
+							<h1>Cadastro de Usuário</h1>
+						</div>
+					</div>				
+				</f:facet>
+			
+				<p:panelGrid columns="2" layout="grid"
+				columnClasses="p-col-6 p-md-1 p-xl-2"
+				contentStyleClass="p-align-baseline ui-fluid">
+					<p:outputLabel value="Nome:"/>
 					
+						<p:inputText style="width:185px"
+							value="#{cadastroController.entity.nome}"
+							readonly="true"
+								/>
+
+					<!-- email -->
+					<p:outputLabel value="email:"/>
+					<p:inputText value="#{cadastroController.entity.email}"  />
+					<!-- telefone -->
+					<p:outputLabel value="telefone:"/>
+					<p:inputMask id="date" value="#{cadastroController.entity.telefone}" mask="(999) 999-9999" validateMask="true"/>
+					<!-- login -->
+					<p:outputLabel value="Login:"/>
+					<p:inputText value="#{cadastroController.entity.login}"/>
+					<!-- senha -->
+					<p:outputLabel value="Senha:"/>
+					<p:inputText value="#{cadastroController.entity.senha}"/>
+					
+	
+				</p:panelGrid>
+				<f:facet name="footer">
+				<h:panelGrid columns="3">
 					<p:commandButton value="cadastrar"
 									 icon="pi pi-check" 
 									 action="#{cadastroController.cadastrar}"
@@ -45,12 +54,12 @@
 									 icon="pi pi-times"
 									 actionListener="#{cadastroController.limpar}"
 									 class="ui-button-secondary"/>
-					
-				</div>
-
-			</p:outputPanel>
-		</p:outputPanel>
+				</h:panelGrid>
+			</f:facet>
+				</p:panel>
+			</div>
 	</h:form>
+
 </h:body>
 
 </html>
