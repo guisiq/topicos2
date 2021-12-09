@@ -97,6 +97,17 @@
 					<p:column headerText="Genero" sortBy="#{livro.genero}" filterBy="#{livro.genero}">
 						<h:outputText value="#{livro.genero}" />
 					</p:column>
+					<p:column exportable="false">
+					<!--  -->
+					<p:commandButton class="ui-button-warning rounded-button" 
+									 icon="pi pi-trash" 
+									 process="@this"
+									 update="dt-livros"
+									 actionListener="#{minhasColecoesController.deleteLivroColecao(Colecao,livro)}">
+									 <!-- oncomplete="PF('deleteColecaoDialog').show()" -->
+						<f:setPropertyActionListener value ="#{Colecao}" target = "#{minhasColecoesController.entity}"/>
+					</p:commandButton>
+				</p:column>
 
 					
 				</p:dataTable>               
