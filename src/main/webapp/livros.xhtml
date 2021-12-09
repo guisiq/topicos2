@@ -31,6 +31,7 @@
 				</div>
 				</div>
 			</header>
+			<p:divider></p:divider>
 			<div >
 				<h:form>
 				<h2>"#{livroController.capitulo.titulo}"</h2>
@@ -38,6 +39,7 @@
 					"#{livroController.capitulo.texto}"
 				</div>
 				<p:commandButton 
+							style="margin :1%;"
 							value="anterior"
 							process="@this"
 							update="@form" 
@@ -45,6 +47,7 @@
 							
 				</p:commandButton>
 				<p:commandButton 
+							style="margin :1%;"
 							value="Proximo Capitulo"
 							process="@this"
 							update="@form" 
