@@ -9,25 +9,50 @@
 		<title>livro </title>
 	</ui:define>
 	<ui:define name="corpo">
-	<f:viewParam name="idlivro" value="#{livroControler.livroid}"></f:viewParam>
+	<f:viewParam name="idlivro" value="#{livroController.livroid}"></f:viewParam>
+	<f:metadata>
+		<f:viewParam name="idlivro" value="#{livroController.livroid}" required="true">
+			
+		</f:viewParam>
+		<f:viewAction action="#{livroController.getLivro}" />
+	</f:metadata>
 	<p:panel>
 		<article>
 			<header>
 				<div>
-				<h2>
-					#{livroControler.livro.titulo}
-				</h2>
+				<h1>
+					#{livroController.livro.titulo}
+				</h1>
+				<h3>
+					#{livroController.livro.autor}
+				</h3>
 				<div>
-					#{livroControler.livro.autor}
-				</div>
-				<div>
-					#{livroControler.livro.sinipse}	
+					#{livroController.livro.sinopse}	
 				</div>
 				</div>
 			</header>
-			<p:divider />
-			<p:repeat value="#{livroControler.livro.capitulos}" var="capitulos">
-			</p:repeat>
+			<div >
+				<h:form>
+				<h2>"#{livroController.capitulo.titulo}"</h2>
+				<div>
+					"#{livroController.capitulo.texto}"
+				</div>
+				<p:commandButton 
+							value="anterior"
+							process="@this"
+							update="@form" 
+							actionListener="#{livroController.capituloAnterior}">				
+							
+				</p:commandButton>
+				<p:commandButton 
+							value="Proximo Capitulo"
+							process="@this"
+							update="@form" 
+							actionListener="#{livroController.procimoCapitulo}">				
+							
+				</p:commandButton>
+				</h:form>
+			</div>
 		</article>
 	</p:panel>
 		

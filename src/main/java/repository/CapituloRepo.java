@@ -24,10 +24,10 @@ public class CapituloRepo extends Repository<Capitulo>{
 			//em.getTransaction().commit();
 			//em.close();
 			
-			Capitulo e = em.merge(capitulo);
+			Capitulo e = (Capitulo)em.merge(capitulo);
 			var insertList = em.createNativeQuery("INSERT INTO livro_capitulo (livro_id, capitulos_id) VALUES (:livroId, :capituloId) ");
 			insertList.setParameter("livroId", livroid);
-			insertList.setParameter("capituloId",capitulo.getId());
+			insertList.setParameter("capituloId",e.getId());
 			insertList.executeUpdate();
 			em.getTransaction().commit();
 			em.close();

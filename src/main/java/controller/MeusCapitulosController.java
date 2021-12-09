@@ -137,6 +137,7 @@ public class MeusCapitulosController extends CRUDController<Capitulo> implements
 				this.entity = getCapitulos().get(0);
 			}else {
 				this.entity = new Capitulo();
+				getCapitulos().add(this.entity);
 			}
 		}
 		return entity;

@@ -20,8 +20,8 @@
                 <!-- perfil -->
                 <p:submenu label="perfil" icon="pi pi-fw pi-user" class="p-d-flex p-jc-end">
                     <p:menuitem value="meu perfil" action="#{menuController.perfil}" icon="pi pi-fw pi-user-plus"/>
-                    <p:menuitem value="biblioteca" icon="pi pi-fw pi-user-minus"/>
-                    <p:menuitem value="configuracoes " icon="pi pi-fw pi-user-minus"/>
+                    <p:menuitem value="meus livros" action="#{menuController.meuslivro}"  icon="pi pi-fw pi-user-minus"/>
+                    <p:menuitem value="biblioteca " action="#{menuController.biblioteca}" icon="pi pi-fw pi-user-minus"/>
                     <p:menuitem value="termina sesão " action="#{menuController.encerrarSessao}"  icon="pi pi-fw pi-user-minus"/>
                 </p:submenu>
                 <p:divider layout="vertical"/>
@@ -39,11 +39,31 @@
                 
                 <!--pesquisar -->
                 <p:menuitem value=""   >
+                <!-- 
                     <p:commandButton icon="pi pi-search" actionListener= "#{menuController.homeLivros}"/>
                     <p:inputText placeholder="Pesquisar livro" value="#{menuController.filtro}">
-                        <!-- <p:ajax event="keyup" listener="#{menuController.homeLivros}" /> -->
+                 -->
+                        <!-- <p:ajax event="keyup" listener="#{menuController.homeLivros}" /> 
                     </p:inputText>
-                </p:menuitem>
+                    -->
+                	<p:autoComplete 
+                		id="conpletLivro" 
+                		value="#{menuController.livro}"
+						var="obj" 
+						itemLabel="#{obj.titulo}" 
+						itemValue="#{obj}"
+						completeMethod="#{menuController.completLivro}"
+						placeholder="Pesquisar Livro" 
+						forceSelection="false"
+						minQueryLength="1" 
+						maxResults="3"
+						moreText="Existem mais livros ..." />
+
+					<p:commandButton value="Ir"
+						action="#{menuController.gerenciarLivro}"
+						process="@this conpletLivro" update="conpletLivro" />
+
+				</p:menuitem>
                 
                 <!-- escrever -->
                 <p:submenu label="escrever" icon="pi pi-fw pi-pencil">

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Perfil {
-	COMUN(0, "comun"), 
+	COMUN(10, "comun"), 
 	MODERADOR(1, "moderador");		   
 	
 	private Integer id;
