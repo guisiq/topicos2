@@ -69,8 +69,49 @@
 					</h:outputText>
 				</p:column>
 				<p:rowExpansion>
-					<p:outputLabel>teste</p:outputLabel>               
-					<p:inputText value = "tesewewe"></p:inputText>               
+					<p:dataTable 
+					id="dt-livros" 
+					widgetVar="dtlivros" 
+					var="livro" 
+					value="#{Colecao.livros}"
+					reflow="true" 
+					rowKey="#{livro.id}"
+					 
+					>
+					<!-- titulo -->
+					<p:column headerText="titulo" sortBy="#{livro.titulo}" filterBy="#{livro.titulo}">
+						<h:outputText value="#{livro.titulo}" />
+					</p:column>
+					<!-- capitulos -->
+					<p:column headerText="capitulos" >
+						<p:commandButton id="ajax" 
+							process="@this" 
+							update="@form" 
+							value="capitulos"
+							actionListener="#{meusLivrosController.openCapitulosDlg(livro)}">
+							<p:ajax 
+								event="dialogReturn" 
+								process="@this" 
+								update="@form" />
+                        </p:commandButton>
+					</p:column>
+					<!--autor -->
+					<p:column headerText="autor" sortBy="#{livro.autor}">
+						<h:outputText value="#{livro.autor}" />
+					</p:column>
+					<!--edicao-->
+					<p:column headerText="edicao" sortBy="#{livro.edicao}" filterBy="#{livro.edicao}">
+						<h:outputText value="#{livro.edicao}" style="font-weight: 700">
+							<f:convertNumber />
+						</h:outputText>
+					</p:column>
+					<!--genero-->
+					<p:column headerText="Genero" sortBy="#{livro.genero}" filterBy="#{livro.genero}">
+						<h:outputText value="#{livro.genero}" />
+					</p:column>
+
+					
+				</p:dataTable>               
             	</p:rowExpansion>
 				<!-- livros -->
 <!-- 				

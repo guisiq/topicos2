@@ -50,7 +50,7 @@
 					</div>
 				</f:facet>
 
-				<p:ajax event="rowSelect" listener="#{minhasColecoesDLController.listing.select(Colecao.id)}"/>
+				<p:ajax event="rowSelect" listener="#{minhasColecoesDLController.select(Colecao)}"/>
 				
 				<p:column style="width:2rem">
                 	<p:rowToggler/>
@@ -59,7 +59,7 @@
 				<!-- titulo -->
 				<p:column headerText="titulo" sortBy="#{Colecao.titulo}" filterBy="#{Colecao.titulo}">
 					<p:commandLink value="#{Colecao.titulo}"
-									actionListener="#{minhasColecoesDLController.listing.select(Colecao.id)}"
+									actionListener="#{minhasColecoesDLController.select(Colecao)}"
 									process="@this" update="@form" />
 				</p:column>
 				<!-- publica -->

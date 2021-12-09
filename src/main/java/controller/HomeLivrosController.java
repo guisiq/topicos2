@@ -31,16 +31,17 @@ public class HomeLivrosController extends CRUDController<Livro> implements Seria
 	private List<Livro> livros;
     LivroRepo repo = new LivroRepo();
 
-	public void  abrirColecaoListing() {
+	public void  abrirColecaoListing(Livro livro) {
+		Session.getInstance().set("livro Colecao", livro);
 		ColecaoListing listing = new ColecaoListing();
 		listing.open();
-
 		System.out.println("Abrir Estado List1");
 
 	}
 
 	public void obterColecaoListing(SelectEvent<Colecao> event) {
 		System.out.println(event.getObject());
+
 	}
 
 	public void ler(Livro livro) {

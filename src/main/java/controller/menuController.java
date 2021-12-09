@@ -62,7 +62,7 @@ public class menuController {
     	Util.redirect("/topicos2/pages/meusLivros.xhtml");
     }
     public void minhasColecoes() {
-    	Util.redirect("/topicos2/pages/minhasColecoes.xhtml");
+    	Util.redirect("/topicos2/pages/milhasColecoes.xhtml");
     }
 
 	public String getFiltro() {

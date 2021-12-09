@@ -21,12 +21,9 @@
 				<p:panelGrid columns="2" layout="grid"
 				columnClasses="p-col-6 p-md-1 p-xl-2"
 				contentStyleClass="p-align-baseline ui-fluid">
+					<!-- nome -->
 					<p:outputLabel value="Nome:"/>
-					
-						<p:inputText style="width:185px"
-							value="#{usuarioController.entity.nome}"
-							readonly="true"
-								/>
+					<p:inputText value="#{usuarioController.entity.nome}"/>
 					<!-- email -->
 					<p:outputLabel value="email:"/>
 					<p:inputText value="#{usuarioController.entity.email}"  />

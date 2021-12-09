@@ -34,7 +34,7 @@
                             <f:facet name="footer">
 
                                 <p:commandButton id="ajax" process="@this" update="@form" value="salvar"
-                                    actionListener="#{homeLivrosController.abrirColecaoListing}">
+                                    actionListener="#{homeLivrosController.abrirColecaoListing(livro)}">
                                     <p:ajax event="dialogReturn" listener="#{homeLivrosController.obterColecaoListing}"
                                         process="@this" update="@form" />
                                 </p:commandButton>

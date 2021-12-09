@@ -3,7 +3,7 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 	<ui:define name="cabeca">
-		<title>meus Capitulos</title>
+		<title>meus Usuarios</title>
 	</ui:define>
 	<ui:define name="corpo">
 
@@ -17,100 +17,99 @@
 
 				<p:toolbar>
 					<p:toolbarGroup>
-						<p:commandButton value="novo Capitulo" 
+						<p:commandButton value="novo Adimin" 
 							icon="pi pi-plus" 
-							actionListener="#{meusCapitulosController.CapituloProcimo}"
-							update=":form:manage-Capitulo-content" 
-							oncomplete="PF('manageCapituloDialog').show()"
+							actionListener="#{meusUsuariosController.UsuarioProcimo}"
+							update=":form:manage-Usuario-content" 
+							oncomplete="PF('manageUsuarioDialog').show()"
 							styleClass="ui-button-success" 
 							style="margin-right: .5rem"
 							/>
 
-						<p:commandButton value="delete" icon="pi pi-minus" update=":form:manage-Capitulo-content"
-							oncomplete="PF('deleteCapituloDialog').show()" styleClass="ui-button-danger"
+						<p:commandButton value="delete" icon="pi pi-minus" update=":form:manage-Usuario-content"
+							oncomplete="PF('deleteUsuarioDialog').show()" styleClass="ui-button-danger"
 							style="margin-right: .5rem">
-							<p:resetInput target=":form:manage-Capitulo-content" />
+							<p:resetInput target=":form:manage-Usuario-content" />
 						</p:commandButton>
 					</p:toolbarGroup>
 				</p:toolbar>
 
 				<p:dataTable 
-				id="dt-Capitulos" 
-				widgetVar="dtCapitulos" 
-				var="Capitulo" 
-				value="#{meusCapitulosController.capitulos}"
-				reflow="true" selection="#{meusCapitulosController.capitulosSelection}" 
-				rowKey="#{Capitulo.id}"
+				id="dt-Usuarios" 
+				widgetVar="dtUsuarios" 
+				var="Usuario" 
+				value="#{gerenciamentoUsuarioController.usuarios}"
+				reflow="true" 
+				selection="#{meusUsuariosController.UsuariosSelection}" 
+				rowKey="#{Usuario.id}"
 				paginator="true" rows="10" 
 				rowSelectMode="add" 
 				paginatorPosition="bottom">
 					<f:facet name="header">
-						<div class="Capitulos-table-header">
-							<span style="font-weight: bold">Capitulos</span>
+						<div class="Usuarios-table-header">
+							<span style="font-weight: bold">Usuarios</span>
 
 							<span class="filter-container ui-input-icon-left">
 								<i class="pi pi-search"></i>
-								<p:inputText id="globalFilter" onkeyup="PF('dtCapitulos').filter()" placeholder="Search" />
+								<p:inputText id="globalFilter" onkeyup="PF('dtUsuarios').filter()" placeholder="Search" />
 							</span>
 
 						</div>
 					</f:facet>
 
-
-
 					<p:column selectionMode="multiple" exportable="false"></p:column>
-					<!-- titulo -->
-					<p:column headerText="titulo" sortBy="#{Capitulo.titulo}" filterBy="#{Capitulo.titulo}">
-						<h:outputText value="#{Capitulo.titulo}" />
+					<!-- nome -->
+					<p:column headerText="nome" sortBy="#{Usuario.nome}" filterBy="#{Usuario.nome}">
+						<h:outputText value="#{Usuario.nome}" />
 					</p:column>
-					<!--texto -->
-					<p:column headerText="autor" sortBy="#{Capitulo.autor}">
-						<h:outputText value="#{Capitulo.texto}" />
+					<!-- email -->
+					<p:column headerText="email" sortBy="#{Usuario.email}">
+						<h:outputText value="#{Usuario.email}" />
 					</p:column>
 					
 					<p:column exportable="false">
 						<!-- editar -->
 						<p:commandButton 
 							icon="pi pi-pencil" 
-							update=":form:manage-Capitulo-content"
-							oncomplete="PF('manageCapituloDialog').show()"
+							update=":form:manage-Usuario-content"
+							oncomplete="PF('manageUsuarioDialog').show()"
 							styleClass="edit-button rounded-button ui-button-success" 
 							process="@this">
-							<f:setPropertyActionListener value="#{Capitulo}" target="#{meusCapitulosController.entity}" />
-							<p:resetInput target=":form:manage-Capitulo-content" />
+							<f:setPropertyActionListener value="#{Usuario}" target="#{meusUsuariosController.entity}" />
+							<p:resetInput target=":form:manage-Usuario-content" />
 						</p:commandButton>
 						<!-- excluir -->
 						<p:commandButton class="ui-button-warning rounded-button" 
 							icon="pi pi-trash" 	
 							process="@this"
-							update="dt-Capitulos" 
-							actionListener="#{meusCapitulosController.deleteCapitulo(Capitulo)}">
-							<!-- oncomplete="PF('deleteCapituloDialog').show()" -->
+							update="dt-Usuarios" 
+							actionListener="#{meusUsuariosController.deleteUsuario(Usuario)}">
+							<!-- oncomplete="PF('deleteUsuarioDialog').show()" -->
 							<p:confirm header="Confirmação" message="Deseja realmente excluir o usuário?"
 								icon="pi pi-exclamation-triangle" />
-							<f:setPropertyActionListener value="#{Capitulo}" target="#{meusCapitulosController.entity}" />
+							<f:setPropertyActionListener value="#{Usuario}" target="#{meusUsuariosController.entity}" />
 						</p:commandButton>
 					</p:column>
 
 				</p:dataTable>
 
-				<p:dialog header="Capitulo Details" showEffect="fade" modal="true" widgetVar="manageCapituloDialog"
+				<p:dialog header="Usuario Details" showEffect="fade" modal="true" widgetVar="manageUsuarioDialog"
 					responsive="true">
-					<p:outputPanel id="manage-Capitulo-content" class="ui-fluid">
+					<p:outputPanel id="manage-Usuario-content" class="ui-fluid">
 						<p:outputPanel>
 							
-							<!--titulo-->
+							<!--nome-->
 							<div class="p-field">
-								<p:outputLabel for="tituloCapitulo">Titulo</p:outputLabel>
-								<p:inputText id="tituloCapitulo" value="#{meusCapitulosController.entity.titulo}" />
+								<p:outputLabel for="nomeUsuario">nome</p:outputLabel>
+								<p:inputText id="nomeUsuario" value="#{meusUsuariosController.entity.nome}" />
 							</div>
 							
 							<!-- corpo -->
 							<div class="p-field">
-								<p:outputLabel for="capitulo">Titulo</p:outputLabel>
-								<!-- <p:inputText id="capitulo" value="#{meusCapitulosController.entity.texto}" /> -->
-								 <p:inputTextarea rows="6" cols="33" id="capitulo" value="#{meusCapitulosController.entity.texto}" />
-								 <!--  <p:textEditor id = "capitulo" widgetVar="editor1" value="#{meusCapitulosController.entity.texto}" height="300"  />
+								<p:outputLabel for="Usuario">nome</p:outputLabel>
+								<!-- <p:inputText id="Usuario" value="#{meusUsuariosController.entity.texto}" /> -->
+								 <p:inputTextarea rows="6" cols="33" id="Usuario" value="#{meusUsuariosController.entity.texto}" />
+								 <!--  <p:textEditor id = "Usuario" widgetVar="editor1" value="#{meusUsuariosController.entity.texto}" height="300"  />
 								-->
 							</div>
 							
@@ -121,9 +120,9 @@
 					<f:facet name="footer">
 						
 						<p:commandButton value="Save" icon="pi pi-check"
-							actionListener="#{meusCapitulosController.saveCapitulo}" update="manage-Capitulo-content dt-Capitulos"
-							process="manage-Capitulo-content @this" />
-						<p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageCapituloDialog').hide()"
+							actionListener="#{meusUsuariosController.saveUsuario}" update="manage-Usuario-content dt-Usuarios"
+							process="manage-Usuario-content @this" />
+						<p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageUsuarioDialog').hide()"
 							class="ui-button-secondary" />
 					</f:facet>
 					
@@ -131,13 +130,13 @@
 
 				</p:dialog>
 
-				<p:confirmDialog widgetVar="deleteCapituloDialog" showEffect="fade" width="300" message="excluir o  Capitulo?"
+				<p:confirmDialog widgetVar="deleteUsuarioDialog" showEffect="fade" width="300" message="excluir o  Usuario?"
 					header="Confirm" severity="warn">
 					<p:commandButton value="confirma" icon="pi pi-check"
-						actionListener="#{meusCapitulosController.deleteCapitulo}" process="@this"
-						oncomplete="PF('deleteCapituloDialog').hide()" />
+						actionListener="#{meusUsuariosController.deleteUsuario}" process="@this"
+						oncomplete="PF('deleteUsuarioDialog').hide()" />
 					<p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-						onclick="PF('deleteCapituloDialog').hide()" />
+						onclick="PF('deleteUsuarioDialog').hide()" />
 				</p:confirmDialog>
 
 				<p:confirmDialog global="true" showEffect="fade" width="300">

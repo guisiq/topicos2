@@ -43,6 +43,7 @@ public class LivroController  implements Serializable {
 	public void procimoCapitulo() {
 		
 		var idiceProcimo = getLivro().getCapitulos().indexOf(capitulo)+1;
+		
 		capitulo = livro.getCapitulos().get(idiceProcimo);
 	}
 	public void capituloAnterior() {

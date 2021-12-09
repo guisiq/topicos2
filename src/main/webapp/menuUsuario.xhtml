@@ -21,12 +21,13 @@
                 <p:submenu label="perfil" icon="pi pi-fw pi-user" class="p-d-flex p-jc-end">
                     <p:menuitem value="meu perfil" action="#{menuController.perfil}" icon="pi pi-fw pi-user-plus"/>
                     <p:menuitem value="meus livros" action="#{menuController.meuslivro}"  icon="pi pi-fw pi-user-minus"/>
-                    <p:menuitem value="biblioteca " action="#{menuController.biblioteca}" icon="pi pi-fw pi-user-minus"/>
+                    <p:menuitem value="Minhas Colecoes" action="#{menuController.minhasColecoes}" icon="pi pi-fw pi-user-minus"/>
                     <p:menuitem value="termina sesão " action="#{menuController.encerrarSessao}"  icon="pi pi-fw pi-user-minus"/>
                 </p:submenu>
                 <p:divider layout="vertical"/>
                 
-                <!-- navegar -->
+                <!-- 
+                    navegar
                 <p:submenu label="navegar" icon="pi pi-fw pi-folder">
                     <p:submenu label="New" icon="pi pi-fw pi-plus">
                         <p:menuitem value="Bookmark" icon="pi pi-fw pi-bookmark"/>
@@ -35,7 +36,7 @@
                     <p:menuitem value="Delete" icon="pi pi-fw pi-trash"/>
                     <p:divider />
                     <p:menuitem value="Export" icon="pi pi-fw pi-external-link"/>
-                </p:submenu>
+                </p:submenu> -->
                 
                 <!--pesquisar -->
                 <p:menuitem value=""   >
@@ -59,17 +60,13 @@
 						maxResults="3"
 						moreText="Existem mais livros ..." />
 
-					<p:commandButton value="Ir"
+					<p:commandButton icon="pi pi-search"
 						action="#{menuController.gerenciarLivro}"
 						process="@this conpletLivro" update="conpletLivro" />
 
 				</p:menuitem>
                 
-                <!-- escrever -->
-                <p:submenu label="escrever" icon="pi pi-fw pi-pencil">
-                    <p:menuitem value="crie uma nova historia " icon="pi pi-fw pi-align-left"/>
-                    <p:menuitem value="minaha historias" icon="pi pi-fw pi-align-right"/>
-                </p:submenu>
+                
     
 
     

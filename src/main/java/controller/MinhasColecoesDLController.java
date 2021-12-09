@@ -48,6 +48,17 @@ public class MinhasColecoesDLController extends CRUDController<Colecao> implemen
 		getEntity();
         
     }
+	public void select(Colecao colecao){
+		var livro = (Livro)Session.getInstance().get("livro Colecao");
+		colecao.getLivros().add(livro);
+		try {
+			repo.save(colecao);
+		} catch (RepositoryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.listing.select(colecao.getId());
+	}
 	public List<Colecao> getColecoes() {
 		if(colecoes == null) {
 			try {
