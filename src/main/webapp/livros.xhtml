@@ -32,17 +32,19 @@
 				</div>
 			</header>
 			<p:divider></p:divider>
-			<div >
-				<h:form>
-				<h2>"#{livroController.capitulo.titulo}"</h2>
+			<div>
+				<form id = "capitulo">
+				<h2>#{livroController.capitulo.titulo}</h2>
 				<div>
-					"#{livroController.capitulo.texto}"
+					#{livroController.capitulo.texto}
 				</div>
+				</form>
+				<h:form>
 				<p:commandButton 
 							style="margin :1%;"
 							value="anterior"
 							process="@this"
-							update="@form" 
+							update="@all" 
 							actionListener="#{livroController.capituloAnterior}">				
 							
 				</p:commandButton>
@@ -50,7 +52,7 @@
 							style="margin :1%;"
 							value="Proximo Capitulo"
 							process="@this"
-							update="@form" 
+							update="capitulo" 
 							actionListener="#{livroController.procimoCapitulo}">				
 							
 				</p:commandButton>

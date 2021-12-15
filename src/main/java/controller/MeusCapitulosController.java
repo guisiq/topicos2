@@ -32,13 +32,14 @@ public class MeusCapitulosController extends CRUDController<Capitulo> implements
 	private Usuario usuarioLog;
 	private Livro livro;
 	private CapituloRepo repo = new CapituloRepo();
-	
+	private LivroRepo repoLivro = new LivroRepo();
 
 	
 
 
 	
 	public void CapituloRemove() {
+		
 		getCapitulos().remove(getEntity());
 	}
 	public void CapituloAterior() {
@@ -56,7 +57,8 @@ public class MeusCapitulosController extends CRUDController<Capitulo> implements
 	
 	public void deleteCapitulo(Capitulo c) {
 		   try {
-
+			   livro.getCapitulos().remove(getEntity());
+				repoLivro.save(livro);
 				repo.remove(c);
 				//CapituloCapitulos.remove(l); 
 				Util.addInfoMessage("Capitulo removido" );

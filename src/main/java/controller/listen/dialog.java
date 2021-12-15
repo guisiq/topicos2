@@ -38,8 +38,8 @@ public abstract class dialog<T> implements Serializable {
 		options.put("modal", true);
 		options.put("draggable", true);
 		options.put("resizable", true);
-		options.put("width", 900);
-		options.put("height", 600);
+		options.put("width", "80%");
+		options.put("height", "90%");
 		options.put("contentWidth", "100%");
 		options.put("contentHeight", "100%");
 	

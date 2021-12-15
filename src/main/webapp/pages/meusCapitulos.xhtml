@@ -38,7 +38,7 @@
 				widgetVar="dtCapitulos" 
 				var="Capitulo" 
 				value="#{meusCapitulosController.capitulos}"
-				reflow="true" selection="#{meusCapitulosController.capitulosSelection}" 
+				reflow="true" 
 				rowKey="#{Capitulo.id}"
 				paginator="true" rows="10" 
 				rowSelectMode="add" 
@@ -83,7 +83,7 @@
 							icon="pi pi-trash" 	
 							process="@this"
 							update="dt-Capitulos" 
-							actionListener="#{meusCapitulosController.deleteCapitulo(Capitulo)}">
+							actionListener="#{meusCapitulosController.deleteCapitulo()}">
 							<!-- oncomplete="PF('deleteCapituloDialog').show()" -->
 							<p:confirm header="Confirmação" message="Deseja realmente excluir o usuário?"
 								icon="pi pi-exclamation-triangle" />
@@ -94,7 +94,7 @@
 				</p:dataTable>
 
 				<p:dialog header="Capitulo Details" showEffect="fade" modal="true" widgetVar="manageCapituloDialog"
-					responsive="true">
+					responsive="true" maximizable="true">
 					<p:outputPanel id="manage-Capitulo-content" class="ui-fluid">
 						<p:outputPanel>
 							
@@ -107,10 +107,7 @@
 							<!-- corpo -->
 							<div class="p-field">
 								<p:outputLabel for="capitulo">Titulo</p:outputLabel>
-								<!-- <p:inputText id="capitulo" value="#{meusCapitulosController.entity.texto}" /> -->
-								 <p:inputTextarea rows="6" cols="33" id="capitulo" value="#{meusCapitulosController.entity.texto}" />
-								 <!--  <p:textEditor id = "capitulo" widgetVar="editor1" value="#{meusCapitulosController.entity.texto}" height="300"  />
-								-->
+								 <p:textEditor id = "capitulo" widgetVar="capitulo" secure='true' value="#{meusCapitulosController.entity.texto}" height="300"/>
 							</div>
 							
 
