@@ -9,6 +9,7 @@ import application.RepositoryException;
 import application.Session;
 import application.Util;
 import entities.Livro;
+import entities.Usuario;
 import repository.LivroRepo;
 
 @Named
@@ -17,9 +18,22 @@ public class menuController {
 	private String filtro;
 	private LivroRepo repo;
 	private Livro livro;
+	private Usuario usuarioLog;
 
+	public void setUsuarioLog(Usuario usuarioLog) {
+		this.usuarioLog = usuarioLog;
+	}
+	public Usuario getUsuarioLog() {
+		if (usuarioLog == null) {
+			try {
+				usuarioLog = (Usuario)Session.getInstance().get("usuarioLogado");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return usuarioLog;
+	}
 	
-  
 	public String encerrarSessao() {
 		Session.getInstance().invalidateSession();
 		System.out.println("passou por aqui");

@@ -84,6 +84,18 @@ public class MinhasColecoesController extends CRUDController<Colecao> implements
         
     }
 
+	public void ler(int livroid){
+		Util.redirect("/topicos2/livros.xhtml?idlivro="+livroid);
+	}
+	public void deleteLivroColecao(Colecao colecao,Livro livro){
+		colecao.getLivros().remove(livro);
+		try {
+			repo.save(colecao);
+		} catch (RepositoryException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	public void saveColecao() {
 		try {
 

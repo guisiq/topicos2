@@ -1,5 +1,7 @@
 package repository;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import application.Message;
@@ -8,7 +10,20 @@ import application.RepositoryException;
 import entities.Usuario;
 
 public class UsuarioRepo extends Repository<Usuario> {
-    @Override
+    
+	public List<Usuario> getAll() throws RepositoryException {
+		try { 
+			// jpql
+			Query query = em.createQuery("SELECT u FROM Usuario u");
+			return query.getResultList();
+		} catch (Exception e) {
+			System.out.println("Erro ao executar o getAll");
+			e.printStackTrace();
+			throw new RepositoryException("Erro ao Consultar no banco.");
+		}
+
+	}
+	@Override
     public Usuario save(Usuario entity) throws RepositoryException {
     	try {
 			
